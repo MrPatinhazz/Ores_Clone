@@ -1,0 +1,9 @@
+﻿  Game.cpp
+  Main.cpp
+  Player.cpp
+  RenderManager.cpp
+  TextureManager.cpp
+  Wall.cpp
+  Generating Code...
+C:\Users\jguil\Desktop\Ores_Clone\src\Wall.cpp(16,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  Ores_Clone.vcxproj -> C:\Users\jguil\Desktop\Ores_Clone\x64\Debug\Ores_Clone.exe
