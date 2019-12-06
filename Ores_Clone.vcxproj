@@ -132,7 +132,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="src\Game.hpp" />
-    <ClInclude Include="src\Player.hpp" />
     <ClInclude Include="src\RenderManager.hpp" />
     <ClInclude Include="src\TextureManager.hpp" />
     <ClInclude Include="src\Wall.hpp" />
@@ -140,7 +139,6 @@
   <ItemGroup>
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\Main.cpp" />
-    <ClCompile Include="src\Player.cpp" />
     <ClCompile Include="src\RenderManager.cpp" />
     <ClCompile Include="src\TextureManager.cpp" />
     <ClCompile Include="src\Wall.cpp" />

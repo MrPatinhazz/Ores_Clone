@@ -42,7 +42,7 @@ void Game::handleEvent()
 	case SDL_MOUSEBUTTONDOWN:
 		if (wall != nullptr)
 		{
-			wall->deleteBlocks(e.button.y / BLOCK_HEIGHT, e.button.x / BLOCK_WIDTH);
+			wall->deleteBlocks((e.button.y - WALL_Y)/ BLOCK_HEIGHT, (e.button.x - WALL_X) / BLOCK_WIDTH);
 		}
 		break;
 	default:

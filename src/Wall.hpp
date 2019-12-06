@@ -1,8 +1,8 @@
 /**
 	Wall Class:
-	Holds wall graphical and matrix dimensions
+	Defines wall matrix dimensions, block dimension and wall position 
 	Methods do delete blocks, move blocks vertically and horizontally
-*/
+**/
 
 #pragma once
 
@@ -16,10 +16,12 @@
 #include <set>
 #include <iterator>
 
-#define NROW 100
-#define NCOL 100
-#define WALL_WIDTH 1000
-#define WALL_HEIGHT 1000
+#define NROW 20
+#define NCOL 20
+#define WALL_WIDTH 500
+#define WALL_HEIGHT 500
+#define WALL_X 500
+#define WALL_Y 100
 #define BLOCK_WIDTH (WALL_WIDTH / NCOL)
 #define BLOCK_HEIGHT (WALL_HEIGHT / NROW)
 #define WMX wall.wallMx
