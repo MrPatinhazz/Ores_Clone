@@ -27,6 +27,7 @@ void Game::init(const char* title, int xpos, int ypos, int w, int h, bool fullsc
 	}
 }
 
+// Handles mouse clicks
 void Game::handleEvent()
 {
 	SDL_Event e;
@@ -39,10 +40,9 @@ void Game::handleEvent()
 		break;
 
 	case SDL_MOUSEBUTTONDOWN:
-		cout << "Click" << endl;
 		if (wall != nullptr)
 		{
-			clickOnBlock(e.button.y / BLOCK_HEIGHT, e.button.x / BLOCK_WIDTH);	
+			wall->deleteBlocks(e.button.y / BLOCK_HEIGHT, e.button.x / BLOCK_WIDTH);
 		}
 		break;
 	default:
@@ -50,12 +50,14 @@ void Game::handleEvent()
 	}
 }
 
+// Updates game logic
 void Game::update()
 {
 	//Logica do timer
 	//Niveis
 }
 
+// Updates game graphics
 void Game::render()
 {
 	SDL_RenderClear(rendMng->getRenderer());
@@ -70,9 +72,4 @@ void Game::clean()
 	rendMng->~RenderMng();
 	SDL_Quit();
 	cout << "Game closed" << endl;
-}
-
-void Game::clickOnBlock(int row, int col)
-{
-	wall->deleteBlocks(row, col);
 }

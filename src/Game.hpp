@@ -20,6 +20,5 @@ public:
 	bool running() { return isRunning; };
 	
 private:
-	bool isRunning;	
-	void clickOnBlock(int row, int col);
+	bool isRunning;
 };
