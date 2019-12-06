@@ -70,7 +70,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LibraryPath>$(ProjectDir)include\SDL2_image-2.0.5\include;$(ProjectDir)include\SDL2-2.0.10\include;$(LibraryPath)</LibraryPath>
+    <LibraryPath>$(ProjectDir)include\SDL2_image-2.0.5\lib\x64;$(ProjectDir)include\SDL2-2.0.10\lib\x64;$(ProjectDir)include\SDL2_ttf-2.0.15\lib\x64;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)include\SDL2-2.0.10\include;$(ProjectDir)include\SDL2_image-2.0.5\include;$(ProjectDir)include\SDL2_ttf-2.0.15\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -92,12 +93,12 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(ProjectDir)include\SDL2-2.0.10\include;$(ProjectDir)include\SDL2_image-2.0.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)include\SDL2-2.0.10\include;$(ProjectDir)include\SDL2_image-2.0.5\include;$(ProjectDir)include\SDL2_ttf-2.0.15\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <AdditionalLibraryDirectories>$(ProjectDir)include\SDL2_image-2.0.5\lib\x64;$(ProjectDir)include\SDL2-2.0.10\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -151,6 +152,9 @@
     <Image Include="assets\ore_3.png" />
     <Image Include="assets\ore_4.png" />
     <Image Include="assets\ore_5.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="assets\Action_Man.ttf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

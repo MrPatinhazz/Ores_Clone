@@ -45,13 +45,11 @@ void WTexture::render(SDL_Rect dstRect)
 	SDL_RenderCopy(tRend, tTex, NULL, &dstRect);
 }
 
-bool WTexture::LoadFromFile(string path)
+// Loads texture from system path
+bool WTexture::loadFromFile(string path)
 {
 	// Erases previous texture
 	free();
-
-	// Target texture
-	SDL_Texture* tex = NULL;
 
 	// Load image from path
 	SDL_Surface* tempSurface = IMG_Load(path.c_str());
@@ -61,9 +59,10 @@ bool WTexture::LoadFromFile(string path)
 	}
 	else
 	{
-		tex = SDL_CreateTextureFromSurface(tRend, tempSurface);
+		// Create texture from prev. generated surface
+		tTex = SDL_CreateTextureFromSurface(tRend, tempSurface);
 
-		if (tex == NULL)
+		if (tTex == NULL)
 		{
 			cout << "Texture creation error: " << SDL_GetError();
 		}
@@ -77,6 +76,39 @@ bool WTexture::LoadFromFile(string path)
 		SDL_FreeSurface(tempSurface);
 	}
 
-	tTex = tex;
+	// Set obj. texture and return sucess state
+	return tTex != NULL;
+}
+
+// Loads texture from written text with a given font
+bool WTexture::loadFromText(string text, SDL_Color textColor, TTF_Font* font)
+{
+	// Erases previous texture
+	free();
+
+	//Render text surface
+	SDL_Surface* textSurface = TTF_RenderText_Solid(font, text.c_str(), textColor);
+	if (textSurface == NULL)
+	{
+		cout << "Error creating text surface :" << TTF_GetError() << endl;
+	}
+	else
+	{
+		//Create texture from surface
+		tTex = SDL_CreateTextureFromSurface(tRend, textSurface);
+		if (tTex == NULL)
+		{
+			cout << "Error creating text from surface: " << SDL_GetError() << endl;
+		}
+		else
+		{
+			texW = textSurface->w;
+			texH = textSurface->h;
+		}
+
+		SDL_FreeSurface(textSurface);
+	}
+
+	//Return sucess if created
 	return tTex != NULL;
 }

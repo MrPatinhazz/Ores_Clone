@@ -7,6 +7,7 @@
 #include "Wall.hpp"
 #include <string>
 
+
 using namespace std;
 
 class RenderMng
@@ -25,7 +26,10 @@ private:
 	SDL_Window* window;
 	SDL_Renderer* renderer;
 
-	WTexture block_tex[BTYPES];
+	WTexture blockTex[BTYPES];
+	WTexture timerTex;
+	TTF_Font* timerFont;
+
 	void initTextures();
 
 	void render_wall(wallstrct* wall);

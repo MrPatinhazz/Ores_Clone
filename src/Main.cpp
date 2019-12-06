@@ -2,7 +2,7 @@
 
 #include "Game.hpp"
 
-#define SCREEN_WIDTH 1000
+#define SCREEN_WIDTH 800
 #define SCREEN_HEIGHT 500
 #define FULLSCREEN false
 

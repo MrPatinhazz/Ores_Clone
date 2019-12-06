@@ -16,12 +16,12 @@
 #include <set>
 #include <iterator>
 
-#define BTYPES 2
-#define NROW 50
-#define NCOL 50
-#define WALL_WIDTH 1000
+#define BTYPES 5
+#define NROW 20
+#define NCOL 20
+#define WALL_WIDTH 500
 #define WALL_HEIGHT 500
-#define WALL_X 0
+#define WALL_X 150
 #define WALL_Y 0
 #define BLOCK_WIDTH (WALL_WIDTH / NCOL)
 #define BLOCK_HEIGHT (WALL_HEIGHT / NROW)

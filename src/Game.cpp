@@ -69,6 +69,8 @@ void Game::render()
 void Game::clean()
 {
 	rendMng->~RenderMng();
+	TTF_Quit();
+	IMG_Quit();
 	SDL_Quit();
 	cout << "Game closed" << endl;
 }

@@ -2,7 +2,10 @@
 
 #include "SDL.h"
 #include "SDL_image.h"
+#include "SDL_ttf.h"
 #include <iostream>
+#include <string>
+#include <cmath>
 
 using namespace std;
 
@@ -32,7 +35,10 @@ public:
 	void setRend(SDL_Renderer* rend) { tRend = rend; };
 
 	// Loads texture from sys path
-	bool LoadFromFile(string path);
+	bool loadFromFile(string path);
+
+	// Load texture from inputed text
+	bool loadFromText(string text, SDL_Color textColor, TTF_Font* font);
 
 private:
 	// Hardware texture
