@@ -3,7 +3,7 @@
 #include "Game.hpp"
 
 #define SCREEN_WIDTH 1000
-#define SCREEN_HEIGHT 600
+#define SCREEN_HEIGHT 1000
 #define FULLSCREEN false
 
 Game* game = nullptr;
