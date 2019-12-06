@@ -3,8 +3,9 @@
 #include "SDL.h"
 #include "SDL_image.h"
 #include <iostream>
-#include "TextureManager.hpp"
+#include "WTexture.hpp"
 #include "Wall.hpp"
+#include <string>
 
 using namespace std;
 
@@ -24,7 +25,7 @@ private:
 	SDL_Window* window;
 	SDL_Renderer* renderer;
 
-	SDL_Texture* block_tex[5];
+	WTexture block_tex[BTYPES];
 	void initTextures();
 
 	void render_wall(wallstrct* wall);

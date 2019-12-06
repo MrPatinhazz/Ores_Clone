@@ -18,16 +18,16 @@
     <ClInclude Include="src\Game.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\TextureManager.hpp">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\Wall.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\RenderManager.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Player.hpp">
+    <ClInclude Include="src\Timer.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\WTexture.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -38,26 +38,20 @@
     <ClCompile Include="src\Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\TextureManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\Wall.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\RenderManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Player.cpp">
+    <ClCompile Include="src\Timer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\WTexture.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="assets\ore_1.png">
-      <Filter>Resource Files</Filter>
-    </Image>
-    <Image Include="assets\ore_2.png">
-      <Filter>Resource Files</Filter>
-    </Image>
     <Image Include="assets\ore_3.png">
       <Filter>Resource Files</Filter>
     </Image>
@@ -65,6 +59,12 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="assets\ore_5.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\ore_2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\ore_1.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

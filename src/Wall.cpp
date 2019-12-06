@@ -13,7 +13,7 @@ Wall::~Wall()
 {
 }
 
-// Inits wall matrix with random values from 0 (empty) to 6, with 5 types of blocks
+// Inits wall matrix with random values from 0 (empty) to BTYPES+1, with BTYPES types of blocks. Usually 5
 void Wall::initWall()
 {
 	srand(time(NULL));
@@ -22,7 +22,7 @@ void Wall::initWall()
 	{
 		for (int j = 0; j < NCOL; j++)
 		{
-			WMX[i][j] = rand() % 6;
+			WMX[i][j] = rand() % (BTYPES+1);
 		}
 	}
 }

@@ -16,10 +16,13 @@
 #include <set>
 #include <iterator>
 
-#define NROW 100
-#define NCOL 100
+#define BTYPES 2
+#define NROW 50
+#define NCOL 50
 #define WALL_WIDTH 1000
-#define WALL_HEIGHT 1000
+#define WALL_HEIGHT 500
+#define WALL_X 0
+#define WALL_Y 0
 #define BLOCK_WIDTH (WALL_WIDTH / NCOL)
 #define BLOCK_HEIGHT (WALL_HEIGHT / NROW)
 #define WMX wall.wallMx
