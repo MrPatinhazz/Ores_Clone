@@ -3,6 +3,9 @@
 #include "SDL.h"
 #include "SDL_image.h"
 #include <iostream>
+#include "Wall.hpp"
+#include "RenderManager.hpp"
+#include "Timer.hpp"
 
 using namespace std;
 
@@ -21,4 +24,7 @@ public:
 	
 private:
 	bool isRunning;
+	Timer* gTimer;
+	Wall* gWall;
+	RenderMng* gRend;
 };

@@ -48,6 +48,7 @@ RenderMng::RenderMng(const char* title, int xpos, int ypos, int w, int h, bool f
 		cout << "SDL_TTF init error :" << TTF_GetError() << endl;
 		return;
 	}
+	cout << "Renderer initiated" << endl;
 
 	initTextures();
 }
@@ -73,13 +74,24 @@ RenderMng::~RenderMng()
 	window = nullptr;
 }
 
-// Renders the grid, game wall (all blocks), and timer text
+// Renders the grid and game wall (all blocks)
 void RenderMng::renderGame(wallstrct* wall)
 {
 	render_grid();
 	render_wall(wall);
-	
-	timerTex.render((800 - timerTex.Width()) / 2, (500 - timerTex.Height()) / 2);
+}
+
+// Renders the ticks given by the timer
+void RenderMng::renderTimer(Uint32 currTime)
+{
+	// Black
+	SDL_Color textColor = { 0, 0, 0 };
+	// If loaded sucessfully
+	if (!timerTex.loadFromText(to_string(currTime), textColor, timerFont))
+	{
+		cout << "Failed rendering text" << endl;
+	}
+	timerTex.render(400, 60);
 }
 
 // Inits the textures for the matrix blocks, one for each BTYPE and text
@@ -101,11 +113,6 @@ void RenderMng::initTextures()
 	{
 		//Render text
 		timerTex = WTexture(renderer);
-		SDL_Color textColor = { 0, 0, 0 };
-		if (!timerTex.loadFromText("Test Text", textColor, timerFont))
-		{
-			cout << "Failed rendering text" << endl;
-		}
 	}
 }
 
@@ -123,7 +130,6 @@ void RenderMng::render_wall(wallstrct* wall)
 			{
 				render_block(bType, i, j);
 			}
-
 		}
 	}
 }

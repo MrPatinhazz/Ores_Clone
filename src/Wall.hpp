@@ -22,7 +22,7 @@
 #define WALL_WIDTH 500
 #define WALL_HEIGHT 500
 #define WALL_X 150
-#define WALL_Y 0
+#define WALL_Y 100
 #define BLOCK_WIDTH (WALL_WIDTH / NCOL)
 #define BLOCK_HEIGHT (WALL_HEIGHT / NROW)
 #define WMX wall.wallMx

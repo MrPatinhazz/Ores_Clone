@@ -1,13 +1,11 @@
 #include "Game.hpp"
-#include "Wall.hpp"
-#include "RenderManager.hpp"
-
-static Wall* wall = nullptr;
-RenderMng* rendMng = nullptr;
 
 Game::Game()
 {
-	wall = new Wall();
+	gWall = nullptr;
+	gTimer = nullptr;
+	gRend = nullptr;
+	isRunning = true;
 }
 
 Game::~Game()
@@ -20,8 +18,13 @@ void Game::init(const char* title, int xpos, int ypos, int w, int h, bool fullsc
 	{
 		cout << "Init sucessfull" << endl;
 		
-		rendMng = new RenderMng(title, xpos, ypos, w, h, fullscreen);
+		gWall = new Wall();
+
+		gRend = new RenderMng(title, xpos, ypos, w, h, fullscreen);
 	
+		gTimer = new Timer();
+		gTimer->start();
+
 		isRunning = true;
 	}
 }
@@ -39,9 +42,10 @@ void Game::handleEvent()
 		break;
 
 	case SDL_MOUSEBUTTONDOWN:
-		if (wall != nullptr)
+		if (gWall != nullptr)
 		{
-			wall->deleteBlocks((e.button.y - WALL_Y) / BLOCK_HEIGHT, (e.button.x - WALL_X) / BLOCK_WIDTH);
+			gWall->deleteBlocks((e.button.y - WALL_Y) / BLOCK_HEIGHT, (e.button.x - WALL_X) / BLOCK_WIDTH);
+			gTimer->pause();
 		}
 		break;
 	default:
@@ -52,23 +56,27 @@ void Game::handleEvent()
 // Updates game logic
 void Game::update()
 {
-	//Logica do timer
-	//Niveis
+	
 }
 
 // Updates game graphics
 void Game::render()
 {
-	SDL_RenderClear(rendMng->getRenderer());
+	SDL_RenderClear(gRend->getRenderer());
 	
-	rendMng->renderGame(&wall->getWall());
+	gRend->renderGame(&gWall->getWall());
+
+	gRend->renderTimer(gTimer->getTicks());
 	
-	SDL_RenderPresent(rendMng->getRenderer());
+	SDL_RenderPresent(gRend->getRenderer());
 }
 
 void Game::clean()
 {
-	rendMng->~RenderMng();
+	gRend->~RenderMng();
+	gWall->~Wall();
+	gTimer->~Timer();
+
 	TTF_Quit();
 	IMG_Quit();
 	SDL_Quit();

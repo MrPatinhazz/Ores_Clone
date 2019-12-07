@@ -20,6 +20,7 @@ public:
 	SDL_Window* getWindow() { return window; };
 
 	void renderGame(wallstrct* wall);
+	void renderTimer(Uint32 currTime);
 
 private:
 	SDL_Rect srcRect, dstRect;
