@@ -150,11 +150,11 @@ void RenderMng::render_block(int blockType, int row, int col)
 void RenderMng::render_grid()
 {
 	SDL_SetRenderDrawColor(renderer, 155, 155, 155, 255);
-	for (int i = 0; i < NCOL + 1; i++)
+	for (int i = 0; i <= NCOL; i++)
 	{
 		SDL_RenderDrawLine(renderer, (i * BLOCK_WIDTH) + WALL_X, 0 + WALL_Y, (i * BLOCK_WIDTH) + WALL_X, WALL_HEIGHT + WALL_Y);
 
-		for (int j = 0; j < NROW + 1; j++)
+		for (int j = 0; j <= NROW; j++)
 		{
 			SDL_RenderDrawLine(renderer, 0 + WALL_X, (i * BLOCK_HEIGHT) + WALL_Y, WALL_WIDTH + WALL_X, (i * BLOCK_HEIGHT) + WALL_Y);
 		}

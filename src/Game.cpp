@@ -45,7 +45,6 @@ void Game::handleEvent()
 		if (gWall != nullptr)
 		{
 			gWall->deleteBlocks((e.button.y - WALL_Y) / BLOCK_HEIGHT, (e.button.x - WALL_X) / BLOCK_WIDTH);
-			gTimer->pause();
 		}
 		break;
 	default:
@@ -56,7 +55,19 @@ void Game::handleEvent()
 // Updates game logic
 void Game::update()
 {
-	
+	if (gTimer->getTicks() > (Uint32)3000)
+	{
+		gTimer->stop();
+		gWall->pushWallLeft();
+		gTimer->start();
+	}
+	// Loosing condition
+	if (gWall->getWall().wallMx[NROW-1][0] != 0)
+	{
+		cout << "You lost!" << endl;
+		gTimer->stop();
+		isRunning = false;
+	}
 }
 
 // Updates game graphics

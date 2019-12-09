@@ -7,7 +7,6 @@
 #include "Wall.hpp"
 #include <string>
 
-
 using namespace std;
 
 class RenderMng

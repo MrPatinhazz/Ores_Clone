@@ -17,12 +17,13 @@
 #include <iterator>
 
 #define BTYPES 5
-#define NROW 20
-#define NCOL 20
-#define WALL_WIDTH 500
-#define WALL_HEIGHT 500
-#define WALL_X 150
-#define WALL_Y 100
+#define NROW 10
+#define NCOL 17
+#define INITCOL (NCOL/2)
+#define WALL_WIDTH 800
+#define WALL_HEIGHT 600
+#define WALL_X 0
+#define WALL_Y 0
 #define BLOCK_WIDTH (WALL_WIDTH / NCOL)
 #define BLOCK_HEIGHT (WALL_HEIGHT / NROW)
 #define WMX wall.wallMx
@@ -41,6 +42,7 @@ public:
 	~Wall();
 	wallstrct getWall() { return wall; };
 	void deleteBlocks(int row, int col);
+	void pushWallLeft();
 
 private:
 	wallstrct wall;
@@ -50,6 +52,6 @@ private:
 	void blockFall(int col);
 	bool colCheck(int col);
 	void fixWall();
-	void moveCols(int col);
+	void fillEmptyCol(int col);
 	bool DFS(int row, int col, set<pair<int, int>> dSet);
 };

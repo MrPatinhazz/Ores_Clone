@@ -14,15 +14,23 @@ Wall::~Wall()
 }
 
 // Inits wall matrix with random values from 0 (empty) to BTYPES+1, with BTYPES types of blocks. Usually 5
+// Generates from last to INITCOL, can be changed in header. The rest will be set to 0
 void Wall::initWall()
 {
 	srand(time(NULL));
 
-	for (int i = 0; i < NROW; i++)
+	for (int i = (NROW-1); i >= 0; i--)
 	{
 		for (int j = 0; j < NCOL; j++)
 		{
-			WMX[i][j] = rand() % (BTYPES+1);
+			if (j > (int)INITCOL)
+			{
+				WMX[i][j] = rand() % (BTYPES + 1);
+			}
+			else
+			{
+				WMX[i][j] = 0;
+			}
 		}
 	}
 }
@@ -52,13 +60,36 @@ void Wall::fixWall()
 		if (j != 0 && WMX[NROW - 1][j] == 0)		// If a column is empty, push the left columns to fix it
 		{
 			cout << j << " col is empty" << endl;
-			moveCols(j);
+			fillEmptyCol(j);
 		}
 	}
 }
 
+//Pushes all columns left one time
+void Wall::pushWallLeft()
+{
+	for (int j = 1; j < NCOL; j++)
+	{
+		for (int i = 0; i < NROW; i++)
+		{
+			WMX[i][j-1] = WMX[i][j];
+			WMX[i][j] = 0;
+		}
+
+		if (j == NCOL-1)
+		{
+			for (int i = 0; i < NROW; i++)
+			{
+				WMX[i][j] = rand() % (BTYPES + 1);
+			}
+		}
+	}
+
+	fixWall();
+}
+
 // Moves the columns when an empty is found
-void Wall::moveCols(int col)
+void Wall::fillEmptyCol(int col)
 {
 	for (int j = col; j > 0; j--)							// Starting from the empty column, all the left columns will be moved
 	{
@@ -121,6 +152,7 @@ void Wall::blockFall(int col)
 }
 
 // Checks if the block clicked is not empty, starts a DFS and fixes the wall if needed
+// RETURN INT TO ADD TO SCORE
 void Wall::deleteBlocks(int row, int col)
 {
 	if (wall.wallMx[row][col] != 0)
@@ -129,6 +161,7 @@ void Wall::deleteBlocks(int row, int col)
 		if (DFS(row, col, deleteSet))
 		{
 			fixWall();
+			// CALCULATE AND RETURN SCORE
 		}
 	}
 }

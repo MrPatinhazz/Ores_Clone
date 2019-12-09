@@ -20,6 +20,7 @@ public:
 	void start();
 	void stop();
 	void pause();
+	void unpause();
 
 	// Get timer time
 	Uint32 getTicks();

@@ -54,6 +54,10 @@ void Timer::pause()
 		pausedTicks = SDL_GetTicks() - startTicks;
 		startTicks = 0;
 	}
+}
+
+void Timer::unpause()
+{
 	// Timer started and is paused -> Unpause
 	if (started && paused)
 	{
