@@ -62,6 +62,7 @@ RenderMng::~RenderMng()
 		x.free();
 	}
 	timerTex.free();
+	scoreTex.free();
 
 	// Free font
 	TTF_CloseFont(timerFont);
@@ -94,6 +95,18 @@ void RenderMng::renderTimer(Uint32 currTime)
 	timerTex.render(400, 60);
 }
 
+void RenderMng::renderScore(int score)
+{
+	// Black
+	SDL_Color textColor = { 0, 0, 0 };
+	// If loaded sucessfully
+	if (!scoreTex.loadFromText(to_string(score), textColor, timerFont))
+	{
+		cout << "Failed rendering text" << endl;
+	}
+	scoreTex.render(0, 0);
+}
+
 // Inits the textures for the matrix blocks, one for each BTYPE and text
 void RenderMng::initTextures()
 {
@@ -112,6 +125,7 @@ void RenderMng::initTextures()
 	else
 	{
 		//Render text
+		scoreTex = WTexture(renderer);
 		timerTex = WTexture(renderer);
 	}
 }

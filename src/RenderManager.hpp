@@ -29,14 +29,14 @@ public:
 
 	void renderGame(wallstrct* wall);
 	void renderTimer(Uint32 currTime);
+	void renderScore(int score);
 
 private:
 	SDL_Rect srcRect, dstRect;
 	SDL_Window* window;
 	SDL_Renderer* renderer;
 
-	WTexture blockTex[BTYPES];
-	WTexture timerTex;
+	WTexture blockTex[BTYPES], timerTex, scoreTex;
 	TTF_Font* timerFont;
 
 	void initTextures();

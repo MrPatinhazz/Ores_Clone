@@ -86,7 +86,9 @@ void Game::render()
 	gRend->renderGame(&gWall->getWall());
 
 	gRend->renderTimer(gTimer->getTicks());
-	
+
+	gRend->renderScore(currScore);
+
 	SDL_RenderPresent(gRend->getRenderer());
 }
 
