@@ -20,12 +20,10 @@
 #define NROW 10
 #define NCOL 17
 #define INITCOL (NCOL/2)
-#define WALL_WIDTH 800
-#define WALL_HEIGHT 600
-#define WALL_X 0
-#define WALL_Y 0
-#define BLOCK_WIDTH (WALL_WIDTH / NCOL)
-#define BLOCK_HEIGHT (WALL_HEIGHT / NROW)
+#define B_WIDTH 32
+#define B_HEIGHT 32
+#define W_WIDTH (B_WIDTH * NCOL)
+#define W_HEIGHT (B_HEIGHT * NROW)
 #define WMX wall.wallMx
 
 using namespace std;
@@ -41,7 +39,7 @@ public:
 	Wall();
 	~Wall();
 	wallstrct getWall() { return wall; };
-	void deleteBlocks(int row, int col);
+	int deleteBlocks(int row, int col);
 	void pushWallLeft();
 
 private:
@@ -53,5 +51,5 @@ private:
 	bool colCheck(int col);
 	void fixWall();
 	void fillEmptyCol(int col);
-	bool DFS(int row, int col, set<pair<int, int>> dSet);
+	int DFS(int row, int col, set<pair<int, int>> dSet);
 };

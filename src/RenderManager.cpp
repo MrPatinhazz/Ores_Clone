@@ -1,20 +1,20 @@
 #include "RenderManager.hpp"
 
-RenderMng::RenderMng(const char* title, int xpos, int ypos, int w, int h, bool fullscreen)
+RenderMng::RenderMng(const char* title, int xpos, int ypos)
 {
 	dstRect = SDL_Rect();
 	srcRect = SDL_Rect();
 	renderer = nullptr;
 	timerFont = NULL;
 
-	int flags = 0;
-	if (fullscreen)
+	int fulls = 0;
+	if (FULLSCREEN)
 	{
-		flags = SDL_WINDOW_FULLSCREEN;
+		fulls = SDL_WINDOW_FULLSCREEN;
 	}
 
 	// Create window with information present on main.cpp
-	window = SDL_CreateWindow(title, xpos, ypos, w, h, flags);
+	window = SDL_CreateWindow(title, xpos, ypos, SCREEN_WIDTH, SCREEN_HEIGHT, fulls);
 	if (window == NULL)
 	{
 		cout << "Error creating window: " << SDL_GetError() << endl;
@@ -137,11 +137,11 @@ void RenderMng::render_wall(wallstrct* wall)
 // Renders a block with its position depending on the row and column and its size on the wall/matrix size
 void RenderMng::render_block(int blockType, int row, int col)
 {
-	dstRect.h = BLOCK_HEIGHT;
-	dstRect.w = BLOCK_WIDTH;
+	dstRect.h = B_HEIGHT;
+	dstRect.w = B_WIDTH;
 
-	dstRect.x = col * BLOCK_WIDTH + WALL_X;
-	dstRect.y = row * BLOCK_HEIGHT + WALL_Y;
+	dstRect.x = (col * B_WIDTH) + W_X0;
+	dstRect.y = (row * B_HEIGHT) + W_Y0;
 
 	blockTex[blockType - 1].render(dstRect);
 }
@@ -150,13 +150,14 @@ void RenderMng::render_block(int blockType, int row, int col)
 void RenderMng::render_grid()
 {
 	SDL_SetRenderDrawColor(renderer, 155, 155, 155, 255);
+
 	for (int i = 0; i <= NCOL; i++)
 	{
-		SDL_RenderDrawLine(renderer, (i * BLOCK_WIDTH) + WALL_X, 0 + WALL_Y, (i * BLOCK_WIDTH) + WALL_X, WALL_HEIGHT + WALL_Y);
+		SDL_RenderDrawLine(renderer, (i * B_WIDTH) + W_X0, W_Y0, (i * B_WIDTH) + W_X0, W_Y1);
 
 		for (int j = 0; j <= NROW; j++)
 		{
-			SDL_RenderDrawLine(renderer, 0 + WALL_X, (i * BLOCK_HEIGHT) + WALL_Y, WALL_WIDTH + WALL_X, (i * BLOCK_HEIGHT) + WALL_Y);
+			SDL_RenderDrawLine(renderer, W_X0, (j * B_HEIGHT) + W_Y0, W_X1, (j * B_HEIGHT) + W_Y0);
 		}
 	}
 }

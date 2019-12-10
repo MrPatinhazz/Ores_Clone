@@ -2,6 +2,7 @@
 
 Game::Game()
 {
+	currScore = 0;
 	gWall = nullptr;
 	gTimer = nullptr;
 	gRend = nullptr;
@@ -12,7 +13,7 @@ Game::~Game()
 {
 }
 
-void Game::init(const char* title, int xpos, int ypos, int w, int h, bool fullscreen)
+void Game::init(const char* title, int xpos, int ypos)
 {
 	if (SDL_Init(SDL_INIT_EVERYTHING) == 0)
 	{
@@ -20,7 +21,7 @@ void Game::init(const char* title, int xpos, int ypos, int w, int h, bool fullsc
 		
 		gWall = new Wall();
 
-		gRend = new RenderMng(title, xpos, ypos, w, h, fullscreen);
+		gRend = new RenderMng(title, xpos, ypos);
 	
 		gTimer = new Timer();
 		gTimer->start();
@@ -44,7 +45,13 @@ void Game::handleEvent()
 	case SDL_MOUSEBUTTONDOWN:
 		if (gWall != nullptr)
 		{
-			gWall->deleteBlocks((e.button.y - WALL_Y) / BLOCK_HEIGHT, (e.button.x - WALL_X) / BLOCK_WIDTH);
+			int clickScore = 0;
+			clickScore = gWall->deleteBlocks((e.button.y - W_Y0) / B_HEIGHT, (e.button.x - W_X0) / B_WIDTH);
+			if (clickScore > 0)
+			{
+				currScore += pow(5, clickScore);
+			}
+			cout << currScore << endl;
 		}
 		break;
 	default:
@@ -55,6 +62,7 @@ void Game::handleEvent()
 // Updates game logic
 void Game::update()
 {
+	// Push the wall each interval
 	if (gTimer->getTicks() > (Uint32)3000)
 	{
 		gTimer->stop();

@@ -19,7 +19,7 @@ void Wall::initWall()
 {
 	srand(time(NULL));
 
-	for (int i = (NROW-1); i >= 0; i--)
+	for (int i = (NROW - 1); i >= 0; i--)
 	{
 		for (int j = 0; j < NCOL; j++)
 		{
@@ -52,14 +52,13 @@ void Wall::fixWall()
 {
 	for (int j = 0; j < NCOL; j++)
 	{
-		while (!colCheck(j))								// While spaces are found between blocks, the column will be fixed
+		while (!colCheck(j))						// While spaces are found between blocks, the column will be fixed
 		{
-			blockFall(j);								// Moves
+			blockFall(j);							// Moves
 		}
 
 		if (j != 0 && WMX[NROW - 1][j] == 0)		// If a column is empty, push the left columns to fix it
 		{
-			cout << j << " col is empty" << endl;
 			fillEmptyCol(j);
 		}
 	}
@@ -72,11 +71,11 @@ void Wall::pushWallLeft()
 	{
 		for (int i = 0; i < NROW; i++)
 		{
-			WMX[i][j-1] = WMX[i][j];
+			WMX[i][j - 1] = WMX[i][j];
 			WMX[i][j] = 0;
 		}
 
-		if (j == NCOL-1)
+		if (j == NCOL - 1)
 		{
 			for (int i = 0; i < NROW; i++)
 			{
@@ -153,27 +152,32 @@ void Wall::blockFall(int col)
 
 // Checks if the block clicked is not empty, starts a DFS and fixes the wall if needed
 // RETURN INT TO ADD TO SCORE
-void Wall::deleteBlocks(int row, int col)
+int Wall::deleteBlocks(int row, int col)
 {
 	if (wall.wallMx[row][col] != 0)
 	{
 		set<pair<int, int>> deleteSet = {};
-		if (DFS(row, col, deleteSet))
+		int nBlocks = DFS(row, col, deleteSet);
+		if (nBlocks > 0)
 		{
 			fixWall();
-			// CALCULATE AND RETURN SCORE
+			cout << "Deleted " << nBlocks << " blocks" << endl;
+			return nBlocks;
+		}
+		else
+		{
+			return 0;
 		}
 	}
 }
 
 // Depth First search
 // Founds number groups (adjacent numbers with the same value) and sets them to 0
-bool Wall::DFS(int row, int col, set<pair<int, int>> dSet)
+int Wall::DFS(int row, int col, set<pair<int, int>> dSet)
 {
 	int bv = WMX[row][col];						// Clicked blocked value
 	stack<pair<int, int>> search = {};			// DFS search stack
 	bool foundEqu = false;						// Has an equal number been found?
-	bool fixWall = false;						// Does the wall need a fix (yes if a block got deleted)
 
 	pair<int, int> start(row, col);				// Clicked coordinate and tree start
 	search.push(start);							// Push the start to the DFS search stack
@@ -199,8 +203,7 @@ bool Wall::DFS(int row, int col, set<pair<int, int>> dSet)
 			if (!dSet.count(searchedCoord) && WMX[searchedRow][searchedCol] == bv)	// If this coord hasnt been searched yet (doesnt exist in the deleted set) and is equal to value, proceed
 			{
 				foundEqu = true;						// An equal as been found (the cycle will be repeated)
-				fixWall = true;							// The wall will need a fix
-				search.push(searchedCoord);				// One more block to search													
+				search.push(searchedCoord);				// One more block to search
 				dSet.emplace(searchedCoord);			// One more block to delete
 			}
 		}
@@ -216,5 +219,5 @@ bool Wall::DFS(int row, int col, set<pair<int, int>> dSet)
 		WMX[x.first][x.second] = 0;
 	}
 
-	return fixWall;
+	return dSet.size();
 }

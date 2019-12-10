@@ -15,7 +15,7 @@ public:
 	Game();
 	~Game();
 
-	void init(const char* title, int xpos, int ypos, int w, int h, bool fulls);
+	void init(const char* title, int xpos, int ypos);
 	void handleEvent();
 	void update();
 	void render();
@@ -23,6 +23,8 @@ public:
 	bool running() { return isRunning; };
 	
 private:
+	int currScore;
+
 	bool isRunning;
 	Timer* gTimer;
 	Wall* gWall;
