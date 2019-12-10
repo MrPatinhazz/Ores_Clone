@@ -13,10 +13,27 @@ using namespace std;
 #define SCREEN_HEIGHT 600
 #define FULLSCREEN false
 
+// Wall start and end x & y coordinate
 #define W_X0 (SCREEN_WIDTH - W_WIDTH)
 #define W_X1 (W_WIDTH + W_X0)
 #define W_Y0 ((SCREEN_HEIGHT - W_HEIGHT)/2)
 #define W_Y1 (W_HEIGHT + W_Y0)
+
+// Score text X & Y
+#define SC_TX_X 0
+#define SC_TX_Y 0
+
+// Timer text
+#define TM_TX_X (SCREEN_WIDTH/2)
+#define TM_TX_Y 0
+// Push wall interval in ms
+#define PSH_INTV 3000
+
+// Current stage text
+#define STG_TX_X (SCREEN_WIDTH - (SCREEN_WIDTH/5))
+#define STG_TX_Y 0
+// Stage points
+#define STG_PTS 200
 
 class RenderMng
 {
@@ -30,13 +47,14 @@ public:
 	void renderGame(wallstrct* wall);
 	void renderTimer(Uint32 currTime);
 	void renderScore(int score);
+	void renderStage(int stage);
 
 private:
 	SDL_Rect srcRect, dstRect;
 	SDL_Window* window;
 	SDL_Renderer* renderer;
 
-	WTexture blockTex[BTYPES], timerTex, scoreTex;
+	WTexture blockTex[BTYPES], timerTex, scoreTex, stageTex;
 	TTF_Font* timerFont;
 
 	void initTextures();

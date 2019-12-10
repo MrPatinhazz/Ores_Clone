@@ -6,7 +6,6 @@ vector<pair<int, int>> dirs = { { -1, 0},{1, 0},{ 0, -1},{0, 1} };
 Wall::Wall()
 {
 	initWall();
-	fixWall();
 }
 
 Wall::~Wall()
@@ -33,6 +32,9 @@ void Wall::initWall()
 			}
 		}
 	}
+
+	// Fills empty holes after creation
+	fixWall();
 }
 
 // Prints the wall matrix to console in matrix form
@@ -161,13 +163,16 @@ int Wall::deleteBlocks(int row, int col)
 		if (nBlocks > 0)
 		{
 			fixWall();
-			cout << "Deleted " << nBlocks << " blocks" << endl;
 			return nBlocks;
 		}
 		else
 		{
 			return 0;
 		}
+	}
+	else
+	{
+		return 0;
 	}
 }
 
@@ -219,5 +224,5 @@ int Wall::DFS(int row, int col, set<pair<int, int>> dSet)
 		WMX[x.first][x.second] = 0;
 	}
 
-	return dSet.size();
+	return (int)dSet.size(); // Returns the amount of blocks to delete
 }

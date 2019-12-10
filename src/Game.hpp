@@ -24,6 +24,7 @@ public:
 	
 private:
 	int currScore;
+	int currStage;
 
 	bool isRunning;
 	Timer* gTimer;

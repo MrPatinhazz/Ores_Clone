@@ -154,7 +154,7 @@
     <Image Include="assets\ore_5.png" />
   </ItemGroup>
   <ItemGroup>
-    <Font Include="assets\Action_Man.ttf" />
+    <Font Include="assets\Pacifico.ttf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

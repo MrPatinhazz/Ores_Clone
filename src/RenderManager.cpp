@@ -63,6 +63,7 @@ RenderMng::~RenderMng()
 	}
 	timerTex.free();
 	scoreTex.free();
+	stageTex.free();
 
 	// Free font
 	TTF_CloseFont(timerFont);
@@ -90,9 +91,9 @@ void RenderMng::renderTimer(Uint32 currTime)
 	// If loaded sucessfully
 	if (!timerTex.loadFromText(to_string(currTime), textColor, timerFont))
 	{
-		cout << "Failed rendering text" << endl;
+		cout << "Failed rendering timer" << endl;
 	}
-	timerTex.render(400, 60);
+	timerTex.render(TM_TX_X, TM_TX_Y);
 }
 
 void RenderMng::renderScore(int score)
@@ -100,11 +101,23 @@ void RenderMng::renderScore(int score)
 	// Black
 	SDL_Color textColor = { 0, 0, 0 };
 	// If loaded sucessfully
-	if (!scoreTex.loadFromText(to_string(score), textColor, timerFont))
+	if (!scoreTex.loadFromText("Score: "+to_string(score), textColor, timerFont))
 	{
-		cout << "Failed rendering text" << endl;
+		cout << "Failed rendering score" << endl;
 	}
-	scoreTex.render(0, 0);
+	scoreTex.render(SC_TX_X, SC_TX_Y);
+}
+
+void RenderMng::renderStage(int stage)
+{
+	// Black
+	SDL_Color textColor = { 0, 0, 0 };
+	// If loaded sucessfully
+	if (!stageTex.loadFromText("Stage: " + to_string(stage), textColor, timerFont))
+	{
+		cout << "Failed rendering stage" << endl;
+	}
+	stageTex.render(STG_TX_X, STG_TX_Y);
 }
 
 // Inits the textures for the matrix blocks, one for each BTYPE and text
@@ -117,7 +130,7 @@ void RenderMng::initTextures()
 	}
 
 	//	Open the Font
-	timerFont = TTF_OpenFont("assets/Action_Man.ttf", 28);
+	timerFont = TTF_OpenFont("assets/Pacifico.ttf", 28);
 	if (timerFont == NULL)
 	{
 		cout << "Error loading font: " << TTF_GetError() << endl;
@@ -125,8 +138,9 @@ void RenderMng::initTextures()
 	else
 	{
 		//Render text
-		scoreTex = WTexture(renderer);
 		timerTex = WTexture(renderer);
+		scoreTex = WTexture(renderer);
+		stageTex = WTexture(renderer);
 	}
 }
 

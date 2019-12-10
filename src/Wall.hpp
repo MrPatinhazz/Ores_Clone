@@ -39,13 +39,12 @@ public:
 	Wall();
 	~Wall();
 	wallstrct getWall() { return wall; };
+	void initWall();
 	int deleteBlocks(int row, int col);
 	void pushWallLeft();
 
 private:
 	wallstrct wall;
-
-	void initWall();
 	void printWall();
 	void blockFall(int col);
 	bool colCheck(int col);

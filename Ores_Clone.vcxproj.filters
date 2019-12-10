@@ -69,7 +69,7 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <Font Include="assets\Action_Man.ttf">
+    <Font Include="assets\Pacifico.ttf">
       <Filter>Resource Files</Filter>
     </Font>
   </ItemGroup>

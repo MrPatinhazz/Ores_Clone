@@ -3,6 +3,7 @@
 Game::Game()
 {
 	currScore = 0;
+	currStage = 1;
 	gWall = nullptr;
 	gTimer = nullptr;
 	gRend = nullptr;
@@ -49,9 +50,8 @@ void Game::handleEvent()
 			clickScore = gWall->deleteBlocks((e.button.y - W_Y0) / B_HEIGHT, (e.button.x - W_X0) / B_WIDTH);
 			if (clickScore > 0)
 			{
-				currScore += pow(5, clickScore);
+				currScore += (clickScore*clickScore);
 			}
-			cout << currScore << endl;
 		}
 		break;
 	default:
@@ -63,7 +63,7 @@ void Game::handleEvent()
 void Game::update()
 {
 	// Push the wall each interval
-	if (gTimer->getTicks() > (Uint32)3000)
+	if (gTimer->getTicks() > (Uint32)PSH_INTV)
 	{
 		gTimer->stop();
 		gWall->pushWallLeft();
@@ -76,6 +76,12 @@ void Game::update()
 		gTimer->stop();
 		isRunning = false;
 	}
+	// Different stage every x score
+	if (currScore > (STG_PTS * currStage))
+	{
+		currStage++;
+		gWall->initWall();
+	}
 }
 
 // Updates game graphics
@@ -83,11 +89,11 @@ void Game::render()
 {
 	SDL_RenderClear(gRend->getRenderer());
 	
+	// Renders wall and grid, timer, score, and curr. stage
 	gRend->renderGame(&gWall->getWall());
-
 	gRend->renderTimer(gTimer->getTicks());
-
 	gRend->renderScore(currScore);
+	gRend->renderStage(currStage);
 
 	SDL_RenderPresent(gRend->getRenderer());
 }
