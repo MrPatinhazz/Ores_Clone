@@ -152,6 +152,7 @@
     <Image Include="assets\ore_3.png" />
     <Image Include="assets\ore_4.png" />
     <Image Include="assets\ore_5.png" />
+    <Image Include="assets\pushw_b.png" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="assets\Pacifico.ttf" />

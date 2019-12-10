@@ -21,6 +21,7 @@ public:
 	void render();
 	void clean();
 	bool running() { return isRunning; };
+	bool clickedPushW(Sint32 mouseX, Sint32 mouseY);
 	
 private:
 	int currScore;

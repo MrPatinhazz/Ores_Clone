@@ -35,6 +35,10 @@ using namespace std;
 // Stage points
 #define STG_PTS 200
 
+// Next stage button
+#define NSB_BT_X (W_X1 - (B_WIDTH*1.5))
+#define NSB_BT_Y (W_Y1 + (B_HEIGHT/2))
+
 class RenderMng
 {
 public:
@@ -54,7 +58,7 @@ private:
 	SDL_Window* window;
 	SDL_Renderer* renderer;
 
-	WTexture blockTex[BTYPES], timerTex, scoreTex, stageTex;
+	WTexture blockTex[BTYPES], timerTex, scoreTex, stageTex, nsBtTex;
 	TTF_Font* timerFont;
 
 	void initTextures();

@@ -56,7 +56,7 @@ RenderMng::RenderMng(const char* title, int xpos, int ypos)
 // Frees every block texture created and destroys renderer and window
 RenderMng::~RenderMng()
 {
-	// Free block and text textures 
+	// Free block, text and button textures 
 	for (auto x : blockTex)
 	{
 		x.free();
@@ -64,6 +64,7 @@ RenderMng::~RenderMng()
 	timerTex.free();
 	scoreTex.free();
 	stageTex.free();
+	nsBtTex.free();
 
 	// Free font
 	TTF_CloseFont(timerFont);
@@ -76,11 +77,41 @@ RenderMng::~RenderMng()
 	window = nullptr;
 }
 
+// Inits the textures for the matrix blocks, one for each BTYPE and text
+void RenderMng::initTextures()
+{
+	//Blocks
+	for (int i = 0; i < BTYPES; i++)
+	{
+		blockTex[i].setRend(renderer);
+		blockTex[i].loadFromFile("assets/ore_" + to_string((i + 1)) + ".png");
+	}
+
+	//Button
+	nsBtTex = WTexture(renderer);
+	nsBtTex.loadFromFile("assets/pushw_b.png");
+
+	//	Open the Font
+	timerFont = TTF_OpenFont("assets/Pacifico.ttf", 28);
+	if (timerFont == NULL)
+	{
+		cout << "Error loading font: " << TTF_GetError() << endl;
+	}
+	else
+	{
+		//Render text
+		timerTex = WTexture(renderer);
+		scoreTex = WTexture(renderer);
+		stageTex = WTexture(renderer);
+	}
+}
+
 // Renders the grid and game wall (all blocks)
 void RenderMng::renderGame(wallstrct* wall)
 {
 	render_grid();
 	render_wall(wall);
+	nsBtTex.render(NSB_BT_X, NSB_BT_Y);
 }
 
 // Renders the ticks given by the timer
@@ -96,6 +127,7 @@ void RenderMng::renderTimer(Uint32 currTime)
 	timerTex.render(TM_TX_X, TM_TX_Y);
 }
 
+// Renders the current game score
 void RenderMng::renderScore(int score)
 {
 	// Black
@@ -108,6 +140,7 @@ void RenderMng::renderScore(int score)
 	scoreTex.render(SC_TX_X, SC_TX_Y);
 }
 
+// Renders the current wall stage
 void RenderMng::renderStage(int stage)
 {
 	// Black
@@ -118,30 +151,6 @@ void RenderMng::renderStage(int stage)
 		cout << "Failed rendering stage" << endl;
 	}
 	stageTex.render(STG_TX_X, STG_TX_Y);
-}
-
-// Inits the textures for the matrix blocks, one for each BTYPE and text
-void RenderMng::initTextures()
-{
-	for (int i = 0; i < BTYPES; i++)
-	{
-		blockTex[i].setRend(renderer);
-		blockTex[i].loadFromFile("assets/ore_" + to_string((i + 1)) + ".png");
-	}
-
-	//	Open the Font
-	timerFont = TTF_OpenFont("assets/Pacifico.ttf", 28);
-	if (timerFont == NULL)
-	{
-		cout << "Error loading font: " << TTF_GetError() << endl;
-	}
-	else
-	{
-		//Render text
-		timerTex = WTexture(renderer);
-		scoreTex = WTexture(renderer);
-		stageTex = WTexture(renderer);
-	}
 }
 
 // Renders the wall - the matrix of blocks

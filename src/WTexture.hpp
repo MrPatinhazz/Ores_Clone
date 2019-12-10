@@ -24,12 +24,18 @@ public:
 	void render(int x, int y);
 	void render(SDL_Rect dstRect);
 
-	// Getter & setter for tex dimensions
+	// Getter & setter for tex dimensions and location
 	int Width() { return texW; };
 	void setWidth(int w) { texW = w; };
 
 	int Height() { return texH; };
 	void setHeight(int h) { texH = h; };
+
+	int Xcoord() { return texX; };
+	void setX(int x) { texX = x; };
+
+	int Ycoord() { return texY; };
+	void setY(int y) { texY = y; };
 	
 	//Sets renderer
 	void setRend(SDL_Renderer* rend) { tRend = rend; };
@@ -47,8 +53,6 @@ private:
 	// Used renderer
 	SDL_Renderer* tRend;
 
-	// Texture dimensions width and height
-	int texW;
-	int texH;
-
+	// Texture dimensions width and height and location X & Y
+	int texW, texH, texX, texY;
 };

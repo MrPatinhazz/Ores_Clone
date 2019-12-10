@@ -3,16 +3,14 @@
 WTexture::WTexture()
 {
 	tTex = NULL;
-	texW = 0;
-	texH = 0;
+	texW = 0, texH = 0, texX = 0, texY = 0;
 	tRend = NULL;
 }
 
 WTexture::WTexture(SDL_Renderer* rend)
 {
 	tTex = NULL;
-	texW = 0;
-	texH = 0;
+	texW = 0, texH = 0, texX = 0, texY = 0;
 	tRend = rend;
 }
 
@@ -28,8 +26,7 @@ void WTexture::free()
 	{
 		SDL_DestroyTexture(tTex);
 		tTex = NULL;
-		texW = 0;
-		texH = 0;
+		texW = 0, texH = 0, texX = 0, texY = 0;
 	}
 }
 
