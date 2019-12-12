@@ -20,15 +20,15 @@ public:
 	void update();
 	void render();
 	void clean();
-	bool running() { return isRunning; };
+	bool running() { return m_isRunning; };
 	bool clickedPushW(Sint32 mouseX, Sint32 mouseY);
 	
 private:
-	int currScore;
-	int currStage;
+	unsigned int m_currScore;
+	unsigned int m_currStage;
 
-	bool isRunning;
-	Timer* gTimer;
-	Wall* gWall;
-	RenderMng* gRend;
+	bool m_isRunning;
+	Timer* m_timer;
+	Wall* m_wall;
+	RenderMng* m_rend;
 };

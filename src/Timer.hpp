@@ -26,13 +26,13 @@ public:
 	Uint32 getTicks();
 
 	// Get timer status. A timer that did not start will always be paused
-	bool isPaused() { return paused && started; };
-	bool hasStarted() { return started; };
+	bool isPaused() { return m_paused && m_started; };
+	bool hasStarted() { return m_started; };
 
 private:
 	// Game ticks when timer starts and was paused
-	Uint32 startTicks, pausedTicks;
+	Uint32 m_start_ticks, m_paused_ticks;
 
 	//Timer status
-	bool paused, started;
+	bool m_paused, m_started;
 };

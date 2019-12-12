@@ -16,15 +16,16 @@
 #include <set>
 #include <iterator>
 
-#define BTYPES 5
-#define NROW 10
-#define NCOL 17
-#define INITCOL (NCOL/2)
-#define B_WIDTH 32
-#define B_HEIGHT 32
-#define W_WIDTH (B_WIDTH * NCOL)
-#define W_HEIGHT (B_HEIGHT * NROW)
-#define WMX wall.wallMx
+#define WMX m_wall.wallMx
+
+constexpr unsigned int BTYPES = 5;						// Block types
+constexpr unsigned int NROW = 10;						// Number of rows
+constexpr unsigned int NCOL = 17;						// '' of columns
+constexpr unsigned int INITCOL = (NCOL / 2);			// Starting column of a new wall (left to right)
+constexpr unsigned int B_WIDTH = 32;					// Block width
+constexpr unsigned int B_HEIGHT = 32;					// Block height
+constexpr unsigned int W_WIDTH = (B_WIDTH * NCOL);		// Wall width
+constexpr unsigned int W_HEIGHT = (B_HEIGHT * NROW);	// Wall height
 
 using namespace std;
 
@@ -38,14 +39,15 @@ class Wall
 public:
 	Wall();
 	~Wall();
-	wallstrct getWall() { return wall; };
+	wallstrct getWall() { return m_wall; };
+	void setBlock(int row, int col, int type);
 	void initWall();
 	int deleteBlocks(int row, int col);
 	void pushWallLeft();
+	void printWall();
 
 private:
-	wallstrct wall;
-	void printWall();
+	wallstrct m_wall;
 	void blockFall(int col);
 	bool colCheck(int col);
 	void fixWall();

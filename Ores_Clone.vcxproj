@@ -147,6 +147,11 @@
     <ClCompile Include="src\Wall.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="assets\bomb_1.png" />
+    <Image Include="assets\bomb_2.png" />
+    <Image Include="assets\bomb_3.png" />
+    <Image Include="assets\bomb_4.png" />
+    <Image Include="assets\bomb_5.png" />
     <Image Include="assets\ore_1.png" />
     <Image Include="assets\ore_2.png" />
     <Image Include="assets\ore_3.png" />

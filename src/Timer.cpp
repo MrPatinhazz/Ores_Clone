@@ -2,11 +2,11 @@
 
 Timer::Timer()
 {
-	startTicks = 0;
-	pausedTicks = 0;
+	m_start_ticks = 0;
+	m_paused_ticks = 0;
 
-	paused = false;
-	started = false;
+	m_paused = false;
+	m_started = false;
 }
 
 Timer::~Timer()
@@ -17,76 +17,76 @@ Timer::~Timer()
 void Timer::start()
 {
 	//Start
-	started = true;
+	m_started = true;
 
 	//Unpause
-	paused = false;
+	m_paused = false;
 
 	// Get current clock time
-	startTicks = SDL_GetTicks();
-	pausedTicks = 0;
+	m_start_ticks = SDL_GetTicks();
+	m_paused_ticks = 0;
 }
 
 // Stop function
 void Timer::stop()
 {
 	// Stop
-	started = false;
+	m_started = false;
 
 	// Unpause
-	paused = false;
+	m_paused = false;
 
 	// Clear tick variables
-	startTicks = 0;
-	pausedTicks = 0;
+	m_start_ticks = 0;
+	m_paused_ticks = 0;
 }
 
 // Pause/Unpause function
 void Timer::pause()
 {
 	// Timer started but isn't paused -> Pause
-	if (started && !paused)
+	if (m_started && !m_paused)
 	{
 		// Pause
-		paused = true;
+		m_paused = true;
 
 		// Paused ticks
-		pausedTicks = SDL_GetTicks() - startTicks;
-		startTicks = 0;
+		m_paused_ticks = SDL_GetTicks() - m_start_ticks;
+		m_start_ticks = 0;
 	}
 }
 
 void Timer::unpause()
 {
 	// Timer started and is paused -> Unpause
-	if (started && paused)
+	if (m_started && m_paused)
 	{
 		// Unpause
-		paused = false;
+		m_paused = false;
 
 		// Resets the starting ticks
-		startTicks = SDL_GetTicks() - pausedTicks;
-		pausedTicks = 0;
+		m_start_ticks = SDL_GetTicks() - m_paused_ticks;
+		m_paused_ticks = 0;
 	}
 }
 
 Uint32 Timer::getTicks()
 {
 	// Timer time
-	Uint32 time = 0;
+	Uint32 _time = 0;
 
 	//Return either the paused ticks or the "until now" ticks
-	if (started)
+	if (m_started)
 	{
-		if (paused)
+		if (m_paused)
 		{
-			time = pausedTicks;
+			_time = m_paused_ticks;
 		}
 		else
 		{
-			time = SDL_GetTicks() - startTicks;
+			_time = SDL_GetTicks() - m_start_ticks;
 		}
 	}
 
-	return time;
+	return _time;
 }

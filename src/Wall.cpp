@@ -1,7 +1,7 @@
 #include "Wall.hpp"
 
 // Adjacent directions to look for - Up, down, left, right
-vector<pair<int, int>> dirs = { { -1, 0},{1, 0},{ 0, -1},{0, 1} };
+vector<pair<int, int>> g_dirs = { { -1, 0},{1, 0},{ 0, -1},{0, 1} };
 
 Wall::Wall()
 {
@@ -10,6 +10,12 @@ Wall::Wall()
 
 Wall::~Wall()
 {
+}
+
+// Changes a block in a designated location
+void Wall::setBlock(int _row, int _col, int _type)
+{
+	m_wall.wallMx[_row][_col] = _type;
 }
 
 // Inits wall matrix with random values from 0 (empty) to BTYPES+1, with BTYPES types of blocks. Usually 5
@@ -24,7 +30,7 @@ void Wall::initWall()
 		{
 			if (j > (int)INITCOL)
 			{
-				WMX[i][j] = rand() % (BTYPES + 1);
+				WMX[i][j] = rand() % (BTYPES+1);
 			}
 			else
 			{
@@ -156,7 +162,7 @@ void Wall::blockFall(int col)
 // RETURN INT TO ADD TO SCORE
 int Wall::deleteBlocks(int row, int col)
 {
-	if (wall.wallMx[row][col] != 0)
+	if (m_wall.wallMx[row][col] != 0)
 	{
 		set<pair<int, int>> deleteSet = {};
 		int nBlocks = DFS(row, col, deleteSet);
@@ -193,7 +199,7 @@ int Wall::DFS(int row, int col, set<pair<int, int>> dSet)
 
 		pair<int, int> currCoord(search.top().first, search.top().second);		// The current coordinate is the top of the search stack
 
-		for (auto dir : dirs)													// For each direction (Up, down, left, right)
+		for (auto dir : g_dirs)													// For each direction (Up, down, left, right)
 		{
 			int searchedRow = currCoord.first + dir.first;						// Row and column currently being searched
 			int searchedCol = currCoord.second + dir.second;

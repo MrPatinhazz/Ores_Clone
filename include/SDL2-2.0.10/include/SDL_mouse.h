@@ -129,7 +129,7 @@ extern DECLSPEC Uint32 SDLCALL SDL_GetRelativeMouseState(int *x, int *y);
  *
  *  \note This function generates a mouse motion event
  */
-extern DECLSPEC void SDLCALL SDL_WarpMouseInWindow(SDL_Window * window,
+extern DECLSPEC void SDLCALL SDL_WarpMouseInWindow(SDL_Window * m_window,
                                                    int x, int y);
 
 /**

@@ -70,6 +70,21 @@
     <Image Include="assets\pushw_b.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="assets\bomb_1.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\bomb_2.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\bomb_3.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\bomb_4.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\bomb_5.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Font Include="assets\Pacifico.ttf">

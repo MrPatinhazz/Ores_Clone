@@ -9,35 +9,35 @@
 
 using namespace std;
 
-#define SCREEN_WIDTH 800
-#define SCREEN_HEIGHT 600
-#define FULLSCREEN false
+constexpr unsigned int SCREEN_WIDTH = 800;
+constexpr unsigned int SCREEN_HEIGHT = 600;
+constexpr bool FULLSCREEN = false;
 
 // Wall start and end x & y coordinate
-#define W_X0 (SCREEN_WIDTH - W_WIDTH)
-#define W_X1 (W_WIDTH + W_X0)
-#define W_Y0 ((SCREEN_HEIGHT - W_HEIGHT)/2)
-#define W_Y1 (W_HEIGHT + W_Y0)
+constexpr unsigned int WALL_X1 = (SCREEN_WIDTH - W_WIDTH);
+constexpr unsigned int WALL_X2 = (W_WIDTH + WALL_X1);
+constexpr unsigned int WALL_Y1 = ((SCREEN_HEIGHT - W_HEIGHT) / 2);
+constexpr unsigned int WALL_Y2 = (W_HEIGHT + WALL_Y1);
 
 // Score text X & Y
-#define SC_TX_X 0
-#define SC_TX_Y 0
+constexpr unsigned int SCR_TXT_X = 0;
+constexpr unsigned int SCR_TXT_Y = 0;
 
 // Timer text
-#define TM_TX_X (SCREEN_WIDTH/2)
-#define TM_TX_Y 0
+constexpr unsigned int TM_TXT_X = (SCREEN_WIDTH / 2);
+constexpr unsigned int TM_TXT_Y = 0;
 // Push wall interval in ms
-#define PSH_INTV 3000
+constexpr unsigned int PSH_INTV = 3000;
 
 // Current stage text
-#define STG_TX_X (SCREEN_WIDTH - (SCREEN_WIDTH/5))
-#define STG_TX_Y 0
+constexpr unsigned int STG_TXT_X = (SCREEN_WIDTH - (SCREEN_WIDTH / 5));
+constexpr unsigned int STG_TXT_Y = 0;
 // Stage points
-#define STG_PTS 200
+constexpr unsigned int STG_PTS = 200;
 
 // Next stage button
-#define NSB_BT_X (W_X1 - (B_WIDTH*1.5))
-#define NSB_BT_Y (W_Y1 + (B_HEIGHT/2))
+constexpr unsigned int NSB_BT_X = (WALL_X2 - (B_WIDTH * 1.5));
+constexpr unsigned int NSB_BT_Y = (WALL_Y2 + (B_HEIGHT / 2));
 
 class RenderMng
 {
@@ -45,25 +45,25 @@ public:
 	RenderMng(const char* title, int xpos, int ypos);
 	~RenderMng();
 
-	SDL_Renderer* getRenderer() { return renderer; };
-	SDL_Window* getWindow() { return window; };
+	SDL_Renderer* getRenderer() { return m_renderer; };
+	SDL_Window* getWindow() { return m_window; };
 
-	void renderGame(wallstrct* wall);
+	void renderGame(wallstrct* m_wall);
 	void renderTimer(Uint32 currTime);
 	void renderScore(int score);
 	void renderStage(int stage);
 
 private:
-	SDL_Rect srcRect, dstRect;
-	SDL_Window* window;
-	SDL_Renderer* renderer;
+	SDL_Rect m_src_rect, m_dst_rect;
+	SDL_Window* m_window;
+	SDL_Renderer* m_renderer;
 
-	WTexture blockTex[BTYPES], timerTex, scoreTex, stageTex, nsBtTex;
-	TTF_Font* timerFont;
+	WTexture m_block_tex[BTYPES], m_bomb_tex[BTYPES], m_timer_tex, m_score_tex, m_stage_tex, m_nst_bttex;
+	TTF_Font* m_timer_font;
 
 	void initTextures();
 
-	void render_wall(wallstrct* wall);
+	void render_wall(wallstrct* m_wall);
 	void render_block(int bType, int row, int col);
 	void render_grid();
 };

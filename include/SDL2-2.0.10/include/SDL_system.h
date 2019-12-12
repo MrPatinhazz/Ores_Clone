@@ -63,7 +63,7 @@ typedef struct IDirect3DDevice9 IDirect3DDevice9;
 
    Once you are done using the device, you should release it to avoid a resource leak.
  */
-extern DECLSPEC IDirect3DDevice9* SDLCALL SDL_RenderGetD3D9Device(SDL_Renderer * renderer);
+extern DECLSPEC IDirect3DDevice9* SDLCALL SDL_RenderGetD3D9Device(SDL_Renderer * m_renderer);
 
 /**
    \brief Returns the DXGI Adapter and Output indices for the specified display index.

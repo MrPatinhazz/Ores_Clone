@@ -21,38 +21,38 @@ public:
 	void free();
 
 	// Renders texture at location with img size or param size
-	void render(int x, int y);
-	void render(SDL_Rect dstRect);
+	void render(unsigned int x, unsigned int y);
+	void render(SDL_Rect m_dst_rect);
 
 	// Getter & setter for tex dimensions and location
-	int Width() { return texW; };
-	void setWidth(int w) { texW = w; };
+	unsigned int Width() { return m_tex_w; };
+	void setWidth(unsigned int _w) { m_tex_w = _w; };
 
-	int Height() { return texH; };
-	void setHeight(int h) { texH = h; };
+	unsigned int Height() { return m_tex_h; };
+	void setHeight(unsigned _h) { m_tex_h = _h; };
 
-	int Xcoord() { return texX; };
-	void setX(int x) { texX = x; };
+	unsigned int Xcoord() { return m_tex_x; };
+	void setX(unsigned _x) { m_tex_x = _x; };
 
-	int Ycoord() { return texY; };
-	void setY(int y) { texY = y; };
+	unsigned int Ycoord() { return m_tex_y; };
+	void setY(unsigned _y) { m_tex_y = _y; };
 	
 	//Sets renderer
-	void setRend(SDL_Renderer* rend) { tRend = rend; };
+	void setRend(SDL_Renderer* _rend) { m_rend = _rend; };
 
 	// Loads texture from sys path
-	bool loadFromFile(string path);
+	bool loadFromFile(string _path);
 
 	// Load texture from inputed text
-	bool loadFromText(string text, SDL_Color textColor, TTF_Font* font);
+	bool loadFromText(string _text, SDL_Color _textColor, TTF_Font* _font);
 
 private:
 	// Hardware texture
-	SDL_Texture* tTex;
+	SDL_Texture* m_tex;
 
 	// Used renderer
-	SDL_Renderer* tRend;
+	SDL_Renderer* m_rend;
 
 	// Texture dimensions width and height and location X & Y
-	int texW, texH, texX, texY;
+	int m_tex_w, m_tex_h, m_tex_x, m_tex_y;
 };
