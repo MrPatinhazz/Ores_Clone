@@ -30,7 +30,7 @@ void Wall::initWall()
 		{
 			if (j > (int)INITCOL)
 			{
-				WMX[i][j] = rand() % (BTYPES+1);
+				WMX[i][j] = rand() % (BTYPES + 1);
 			}
 			else
 			{
@@ -231,4 +231,57 @@ int Wall::DFS(int row, int col, set<pair<int, int>> dSet)
 	}
 
 	return (int)dSet.size(); // Returns the amount of blocks to delete
+}
+
+int Wall::explodeBomb(int row, int col, int bType)
+{
+	switch (bType)
+	{
+	case 6:
+	{
+		cout << "Multi color bomb" << endl;
+		break;
+	}
+	case 7:
+	{
+		cout << "Blue bomb" << endl;
+		for (int i = NCOL; i--;)
+		{
+			WMX[row][i] = 0;
+		}
+		break;
+	}
+	case 8:
+	{
+		cout << "Yellow bomb" << endl;
+		for (int i = row - 1; i <= row + 1; i++)
+		{
+			for (int j = col - 1; j <= col + 1; j++)
+			{
+				if (i > 0 && i < NROW && j > 0 && j < NCOL)
+				{
+					WMX[i][j] = 0;
+				}
+			}
+		}
+		break;
+	}
+	case 9:
+	{
+		cout << "Grey bomb" << endl;
+		for (int i = NROW; i--;)
+		{
+			WMX[i][col] = 0;
+		}
+		break;
+	}
+	case 10:
+	{
+		cout << "Green bomb" << endl;
+		break;
+	}
+	default:
+		break;
+	}
+	return 0;
 }

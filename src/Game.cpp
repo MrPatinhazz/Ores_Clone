@@ -47,23 +47,35 @@ void Game::handleEvent()
 		{
 			int _clickScore = 0;
 			int _blockType = 0;
+
 			int _row = (e.button.y - WALL_Y1) / B_HEIGHT;
 			int _col = (e.button.x - WALL_X1) / B_WIDTH;
 
 			// Type of block clicked
-			_blockType = m_wall->getWall().wallMx[_row][_col];
-
-			// Block clicks and added score if applied
-			_clickScore = m_wall->deleteBlocks(_row,_col);
-			if (_clickScore > 0)
+			if (_row >= 0 && _row < NROW && _col >= 0 && _col < NCOL)
 			{
-				m_currScore += (_clickScore*_clickScore);
+				_blockType = m_wall->getWall().wallMx[_row][_col];
 
-				if (_clickScore > 4)
+				// Block clicks and added score if applied
+				_clickScore = m_wall->deleteBlocks(_row, _col);
+				if (_blockType <= 5)
 				{
-					m_wall->setBlock(_row, _col, (_blockType + 5));
+					if (_clickScore > 0)
+					{
+						m_currScore += (_clickScore * _clickScore);
+
+						if (_clickScore > 4)
+						{
+							m_wall->setBlock(_row, _col, (_blockType + 5));
+						}
+					}
+				}
+				else
+				{
+					_clickScore = m_wall->explodeBomb(_row, _col, _blockType);
 				}
 			}
+
 
 			// Push wall button click
 			if (clickedPushW(e.button.x, e.button.y))

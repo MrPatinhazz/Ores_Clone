@@ -45,6 +45,7 @@ public:
 	int deleteBlocks(int row, int col);
 	void pushWallLeft();
 	void printWall();
+	int explodeBomb(int row, int col, int bType);
 
 private:
 	wallstrct m_wall;
