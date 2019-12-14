@@ -214,20 +214,14 @@ void RenderMng::render_wall(wallstrct* _wall)
 // Renders a block with its position depending on the row and column and its size on the wall/matrix size
 void RenderMng::render_block(int _blockType, int _row, int _col)
 {
-	m_dst_rect.h = B_HEIGHT;
-	m_dst_rect.w = B_WIDTH;
-
-	m_dst_rect.x = (_col * B_WIDTH) + WALL_X1;
-	m_dst_rect.y = (_row * B_HEIGHT) + WALL_Y1;
-
 	// If the block type is 1-5 render an ore, else render a bomb 
 	if (_blockType <= BTYPES)
 	{
-		m_block_tex[_blockType - 1].render(m_dst_rect);
+		m_block_tex[_blockType - 1].render((_col * B_WIDTH) + WALL_X1, (_row * B_HEIGHT) + WALL_Y1);
 	}
 	else
 	{
-		m_bomb_tex[_blockType - (BTYPES + 1)].render(m_dst_rect);
+		m_bomb_tex[_blockType - (BTYPES + 1)].render((_col * B_WIDTH) + WALL_X1, (_row * B_HEIGHT) + WALL_Y1);
 	}
 }
 

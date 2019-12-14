@@ -37,9 +37,12 @@ void WTexture::render(unsigned int _x, unsigned int _y)
 	SDL_RenderCopy(m_rend, m_tex, NULL, &renderQuad);
 }
 
-void WTexture::render(SDL_Rect _m_dst_rect)
+void WTexture::setBlendMode(SDL_BlendMode b_mode)
 {
-	SDL_RenderCopy(m_rend, m_tex, NULL, &_m_dst_rect);
+}
+
+void WTexture::setAlpha(Uint8 a)
+{
 }
 
 // Loads texture from system path
@@ -65,7 +68,7 @@ bool WTexture::loadFromFile(string _path)
 		}
 		else
 		{
-			// Get dimensions
+			// Save tex dimensions
 			m_tex_w = tempSurface->w;
 			m_tex_h = tempSurface->h;
 		}

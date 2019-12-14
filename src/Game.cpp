@@ -59,7 +59,8 @@ void Game::handleEvent()
 			{
 				_blockType = m_wall->getWall().wallMx[_row][_col];
 
-				if (!m_isMultiBomb && !m_isAimBomb)
+				// Not currently in click bomb so click bomb or ore
+				if (!m_isMultiBomb && !m_isAimBomb) 
 				{
 					// If the clicked location is an ore
 					if (_blockType <= 5)
@@ -72,9 +73,11 @@ void Game::handleEvent()
 						deleteBomb(_row, _col, _blockType);
 					}
 				}
-				else
+				// Currently in click bomb 
+				else 
 				{
-					if (m_isMultiBomb)
+					// Multi color bomb - deletes all equal to clicked
+					if (m_isMultiBomb)	
 					{
 						int _clickScore = 0;
 						for (int i = 0; i <= NROW; i++)
@@ -91,9 +94,9 @@ void Game::handleEvent()
 						m_currScore += (_clickScore * 10);
 						m_isMultiBomb = false;
 					}
+					// Aim bomb - deletes all clicked
 					if (m_isAimBomb)
 					{
-						cout << "Click" << endl;
 						if (_blockType > 0 && _blockType <= 5)
 						{
 							m_wall->setBlock(_row, _col, 0);
@@ -103,6 +106,7 @@ void Game::handleEvent()
 						{
 							m_currScore += (AIM_CLICKS * AIM_CLICKS);
 							m_isAimBomb = false;
+							m_ABomb_clicks = 0;
 						}
 					}
 				}

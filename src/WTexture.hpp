@@ -24,6 +24,12 @@ public:
 	void render(unsigned int x, unsigned int y);
 	void render(SDL_Rect m_dst_rect);
 
+	//Set blending
+	void setBlendMode(SDL_BlendMode b_mode);
+
+	//Set alpha modulation
+	void setAlpha(Uint8 a);
+
 	// Getter & setter for tex dimensions and location
 	unsigned int Width() { return m_tex_w; };
 	void setWidth(unsigned int _w) { m_tex_w = _w; };
