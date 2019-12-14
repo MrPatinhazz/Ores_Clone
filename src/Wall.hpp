@@ -6,15 +6,13 @@
 
 #pragma once
 
+#include "SDL.h"
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
-#include "SDL.h"
 #include <stack>
 #include <vector>
-#include <utility>
 #include <set>
-#include <iterator>
 
 #define WMX m_wall.wallMx
 

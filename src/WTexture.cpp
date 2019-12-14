@@ -14,11 +14,6 @@ WTexture::WTexture(SDL_Renderer* _rend)
 	m_rend = _rend;
 }
 
-WTexture::~WTexture()
-{
-	free();
-}
-
 void WTexture::free()
 {
 	//Free texture if it exists
@@ -30,19 +25,11 @@ void WTexture::free()
 	}
 }
 
-void WTexture::render(unsigned int _x, unsigned int _y)
+void WTexture::render()
 {
 	//	Set rendering destination quad
-	SDL_Rect renderQuad = { _x, _y, m_tex_w, m_tex_h};
+	SDL_Rect renderQuad = { m_tex_x, m_tex_y, m_tex_w, m_tex_h};
 	SDL_RenderCopy(m_rend, m_tex, NULL, &renderQuad);
-}
-
-void WTexture::setBlendMode(SDL_BlendMode b_mode)
-{
-}
-
-void WTexture::setAlpha(Uint8 a)
-{
 }
 
 // Loads texture from system path

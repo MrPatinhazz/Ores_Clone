@@ -1,10 +1,10 @@
 #pragma once
 
+#include "WTexture.hpp"
+#include "Wall.hpp"
 #include "SDL.h"
 #include "SDL_image.h"
 #include <iostream>
-#include "WTexture.hpp"
-#include "Wall.hpp"
 #include <string>
 
 using namespace std;
@@ -43,7 +43,6 @@ constexpr unsigned int MBOMB_TXT_Y = 50;
 constexpr unsigned int ABOMB_TXT_X = (SCREEN_WIDTH / 3);
 constexpr unsigned int ABOMB_TXT_Y = 50;
 
-
 class RenderMng
 {
 public:
@@ -77,7 +76,7 @@ private:
 
 	void initTextures();
 
-	void render_wall(wallstrct* m_wall);
-	void render_block(int bType, int row, int col);
-	void render_grid();
+	void renderWall(wallstrct* m_wall);
+	void renderBlock(int bType, int row, int col);
+	void renderGrid();
 };

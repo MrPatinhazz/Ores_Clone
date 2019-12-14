@@ -1,11 +1,11 @@
 #pragma once
 
-#include "SDL.h"
-#include "SDL_image.h"
-#include <iostream>
 #include "Wall.hpp"
 #include "RenderManager.hpp"
 #include "Timer.hpp"
+#include "SDL.h"
+#include "SDL_image.h"
+#include <iostream>
 
 using namespace std;
 
@@ -38,5 +38,4 @@ private:
 	bool clickedPushW(Sint32 mouseX, Sint32 mouseY);
 	void deleteOres(int _row, int _col, int _btype);
 	void deleteBomb(int _row, int _col, int _btype);
-
 };

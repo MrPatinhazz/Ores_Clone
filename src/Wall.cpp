@@ -12,10 +12,10 @@ Wall::~Wall()
 {
 }
 
-// Changes a block in a designated location
+// Changes a block in a designated location and calls for a fix
 void Wall::setBlock(int _row, int _col, int _type)
 {
-	m_wall.wallMx[_row][_col] = _type;
+	WMX[_row][_col] = _type;
 	fixWall();
 }
 
@@ -73,42 +73,6 @@ void Wall::fixWall()
 	}
 }
 
-//Pushes all columns left one time
-void Wall::pushWallLeft()
-{
-	for (int j = 1; j < NCOL; j++)
-	{
-		for (int i = 0; i < NROW; i++)
-		{
-			WMX[i][j - 1] = WMX[i][j];
-			WMX[i][j] = 0;
-		}
-
-		if (j == NCOL - 1)
-		{
-			for (int i = 0; i < NROW; i++)
-			{
-				WMX[i][j] = rand() % (BTYPES + 1);
-			}
-		}
-	}
-
-	fixWall();
-}
-
-// Moves the columns when an empty is found
-void Wall::fillEmptyCol(int col)
-{
-	for (int j = col; j > 0; j--)							// Starting from the empty column, all the left columns will be moved
-	{
-		for (int i = 0; i < NROW; i++)						/// Every block will be swapped with the adjacent left block
-		{
-			WMX[i][j] = WMX[i][j - 1];
-			WMX[i][j - 1] = 0;
-		}
-	}
-}
-
 // Checks if a column needs fixing (has "holes")
 bool Wall::colCheck(int col)
 {
@@ -132,6 +96,42 @@ bool Wall::colCheck(int col)
 	}
 
 	return isOk;
+}
+
+// Moves the columns when an empty is found
+void Wall::fillEmptyCol(int col)
+{
+	for (int j = col; j > 0; j--)							// Starting from the empty column, all the left columns will be moved
+	{
+		for (int i = 0; i < NROW; i++)						/// Every block will be swapped with the adjacent left block
+		{
+			WMX[i][j] = WMX[i][j - 1];
+			WMX[i][j - 1] = 0;
+		}
+	}
+}
+
+//Pushes all columns left one time
+void Wall::pushWallLeft()
+{
+	for (int j = 1; j < NCOL; j++)
+	{
+		for (int i = 0; i < NROW; i++)
+		{
+			WMX[i][j - 1] = WMX[i][j];
+			WMX[i][j] = 0;
+		}
+
+		if (j == NCOL - 1)
+		{
+			for (int i = 0; i < NROW; i++)
+			{
+				WMX[i][j] = rand() % (BTYPES + 1);
+			}
+		}
+	}
+
+	fixWall();
 }
 
 // Makes the blocks above the column holes "fall", filling those spaces
@@ -160,7 +160,6 @@ void Wall::blockFall(int col)
 }
 
 // Checks if the block clicked is not empty, starts a DFS and fixes the wall if needed
-// RETURN INT TO ADD TO SCORE
 int Wall::dfsDelete(int row, int col)
 {
 	if (m_wall.wallMx[row][col] != 0)

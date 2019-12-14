@@ -123,9 +123,10 @@ void RenderMng::initTextures()
 // Renders the grid and game wall (all blocks)
 void RenderMng::renderGame(wallstrct* m_wall)
 {
-	render_grid();
-	render_wall(m_wall);
-	m_nst_bttex.render(NSB_BT_X, NSB_BT_Y);
+	renderGrid();
+	renderWall(m_wall);
+	m_nst_bttex.setLoc(NSB_BT_X, NSB_BT_Y);
+	m_nst_bttex.render();
 }
 
 // Renders the ticks given by the timer
@@ -138,7 +139,8 @@ void RenderMng::renderTimer(Uint32 _currTime)
 	{
 		cout << "Failed rendering timer" << endl;
 	}
-	m_timer_tex.render(TM_TXT_X, TM_TXT_Y);
+	m_timer_tex.setLoc(TM_TXT_X, TM_TXT_Y);
+	m_timer_tex.render();
 }
 
 // Renders the current game score
@@ -151,7 +153,8 @@ void RenderMng::renderScore(int _score)
 	{
 		cout << "Failed rendering score" << endl;
 	}
-	m_score_tex.render(SCR_TXT_X, SCR_TXT_Y);
+	m_score_tex.setLoc(SCR_TXT_X, SCR_TXT_Y);
+	m_score_tex.render();
 }
 
 // Renders the current wall stage
@@ -164,7 +167,8 @@ void RenderMng::renderStage(int _stage)
 	{
 		cout << "Failed rendering stage" << endl;
 	}
-	m_stage_tex.render(STG_TXT_X, STG_TXT_Y);
+	m_stage_tex.setLoc(STG_TXT_X, STG_TXT_Y);
+	m_stage_tex.render();
 }
 
 // Renders the info text of the multi bomb
@@ -177,7 +181,8 @@ void RenderMng::renderMultiBomb()
 	{
 		cout << "Failed rendering multi bomb text" << endl;
 	}
-	m_multiB_tex.render(MBOMB_TXT_X , MBOMB_TXT_Y);
+	m_multiB_tex.setLoc(MBOMB_TXT_X, MBOMB_TXT_Y);
+	m_multiB_tex.render();
 }
 
 // Renders the info text of the aim bomb
@@ -190,11 +195,12 @@ void RenderMng::renderAimBomb(int _clicks)
 	{
 		cout << "Failed rendering aim bomb text" << endl;
 	}
-	m_aimB_tex.render(ABOMB_TXT_X, ABOMB_TXT_Y);
+	m_aimB_tex.setLoc(ABOMB_TXT_X, ABOMB_TXT_Y);
+	m_aimB_tex.render();
 }
 
 // Renders the wall - the matrix of blocks
-void RenderMng::render_wall(wallstrct* _wall)
+void RenderMng::renderWall(wallstrct* _wall)
 {
 	SDL_SetRenderDrawColor(m_renderer, 255, 255, 255, 255);
 
@@ -205,28 +211,30 @@ void RenderMng::render_wall(wallstrct* _wall)
 			int _bType = _wall->wallMx[i][j];
 			if (_bType != 0)
 			{
-				render_block(_bType, i, j);
+				renderBlock(_bType, i, j);
 			}
 		}
 	}
 }
 
 // Renders a block with its position depending on the row and column and its size on the wall/matrix size
-void RenderMng::render_block(int _blockType, int _row, int _col)
+void RenderMng::renderBlock(int _bT, int _row, int _col)
 {
 	// If the block type is 1-5 render an ore, else render a bomb 
-	if (_blockType <= BTYPES)
+	if (_bT <= BTYPES)
 	{
-		m_block_tex[_blockType - 1].render((_col * B_WIDTH) + WALL_X1, (_row * B_HEIGHT) + WALL_Y1);
+		m_block_tex[_bT - 1].setLoc((_col * B_WIDTH) + WALL_X1, (_row * B_HEIGHT) + WALL_Y1);
+		m_block_tex[_bT - 1].render();
 	}
 	else
 	{
-		m_bomb_tex[_blockType - (BTYPES + 1)].render((_col * B_WIDTH) + WALL_X1, (_row * B_HEIGHT) + WALL_Y1);
+		m_bomb_tex[_bT - (BTYPES + 1)].setLoc((_col * B_WIDTH) + WALL_X1, (_row * B_HEIGHT) + WALL_Y1);
+		m_bomb_tex[_bT - (BTYPES + 1)].render();
 	}
 }
 
 // Draws a guiding grid
-void RenderMng::render_grid()
+void RenderMng::renderGrid()
 {
 	SDL_SetRenderDrawColor(m_renderer, 155, 155, 155, 255);
 
