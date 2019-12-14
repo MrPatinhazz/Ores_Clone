@@ -42,7 +42,7 @@ public:
 	wallstrct getWall() { return m_wall; };
 	void setBlock(int row, int col, int type);
 	void initWall();
-	int deleteBlocks(int row, int col);
+	int dfsDelete(int row, int col);
 	void pushWallLeft();
 	void printWall();
 	int explodeBomb(int row, int col, int bType);

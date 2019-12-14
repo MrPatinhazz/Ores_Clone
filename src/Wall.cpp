@@ -16,6 +16,7 @@ Wall::~Wall()
 void Wall::setBlock(int _row, int _col, int _type)
 {
 	m_wall.wallMx[_row][_col] = _type;
+	fixWall();
 }
 
 // Inits wall matrix with random values from 0 (empty) to BTYPES+1, with BTYPES types of blocks. Usually 5
@@ -160,7 +161,7 @@ void Wall::blockFall(int col)
 
 // Checks if the block clicked is not empty, starts a DFS and fixes the wall if needed
 // RETURN INT TO ADD TO SCORE
-int Wall::deleteBlocks(int row, int col)
+int Wall::dfsDelete(int row, int col)
 {
 	if (m_wall.wallMx[row][col] != 0)
 	{
@@ -233,55 +234,69 @@ int Wall::DFS(int row, int col, set<pair<int, int>> dSet)
 	return (int)dSet.size(); // Returns the amount of blocks to delete
 }
 
+// Except for click bombs (multi and aim), deletes blocks according to the bomb clicked
 int Wall::explodeBomb(int row, int col, int bType)
 {
+	int score = 0;
+
 	switch (bType)
 	{
-	case 6:
+	case 6: // Multi color (red) - Breaks all of the same color of clicked
 	{
 		cout << "Multi color bomb" << endl;
+		score = -1;
 		break;
 	}
-	case 7:
+	case 7:	// Blue - Breaks all blocks in the bomb's row
 	{
-		cout << "Blue bomb" << endl;
 		for (int i = NCOL; i--;)
 		{
-			WMX[row][i] = 0;
+			if (WMX[row][i] != 0)
+			{
+				score++;
+				WMX[row][i] = 0;
+			}
 		}
 		break;
 	}
-	case 8:
+	case 8: // Yellow - Breaks all blocks in an area
 	{
-		cout << "Yellow bomb" << endl;
 		for (int i = row - 1; i <= row + 1; i++)
 		{
 			for (int j = col - 1; j <= col + 1; j++)
 			{
-				if (i > 0 && i < NROW && j > 0 && j < NCOL)
+				if (i > 0 && i < NROW && j > 0 && j < NCOL && WMX[i][j] != 0)
 				{
+					score++;
 					WMX[i][j] = 0;
 				}
 			}
 		}
 		break;
 	}
-	case 9:
+	case 9: // Grey - Breaks all blocks in the bomb's column
 	{
-		cout << "Grey bomb" << endl;
 		for (int i = NROW; i--;)
 		{
-			WMX[i][col] = 0;
+			if (WMX[i][col] != 0)
+			{
+				score++;
+				WMX[i][col] = 0;
+			}
 		}
 		break;
 	}
-	case 10:
+	case 10: // Green - Breaks all clicked blocks
 	{
 		cout << "Green bomb" << endl;
+		score = -2;
 		break;
 	}
 	default:
 		break;
 	}
-	return 0;
+
+	fixWall();
+
+	return score;
 }

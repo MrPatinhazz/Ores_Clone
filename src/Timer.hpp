@@ -9,6 +9,9 @@
 #include <string>
 #include <sstream>
 
+// Push wall interval in ms
+constexpr unsigned int PSH_INTV = 6000;
+
 class Timer
 {
 public:

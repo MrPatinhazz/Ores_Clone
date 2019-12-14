@@ -9,6 +9,12 @@
 
 using namespace std;
 
+// Stage points
+constexpr unsigned int STG_PTS = 400;
+
+// Max clicks for aim bomb
+constexpr unsigned int AIM_CLICKS = 9;
+
 class Game
 {
 public:
@@ -21,14 +27,16 @@ public:
 	void render();
 	void clean();
 	bool running() { return m_isRunning; };
-	bool clickedPushW(Sint32 mouseX, Sint32 mouseY);
 	
 private:
-	unsigned int m_currScore;
-	unsigned int m_currStage;
-
-	bool m_isRunning;
+	unsigned int m_currScore, m_currStage, m_MBombType, m_ABomb_clicks;
+	bool m_isRunning, m_isMultiBomb, m_isAimBomb;
 	Timer* m_timer;
 	Wall* m_wall;
 	RenderMng* m_rend;
+	
+	bool clickedPushW(Sint32 mouseX, Sint32 mouseY);
+	void deleteOres(int _row, int _col, int _btype);
+	void deleteBomb(int _row, int _col, int _btype);
+
 };

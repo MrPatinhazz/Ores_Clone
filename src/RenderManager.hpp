@@ -26,18 +26,23 @@ constexpr unsigned int SCR_TXT_Y = 0;
 // Timer text
 constexpr unsigned int TM_TXT_X = (SCREEN_WIDTH / 2);
 constexpr unsigned int TM_TXT_Y = 0;
-// Push wall interval in ms
-constexpr unsigned int PSH_INTV = 3000;
 
 // Current stage text
 constexpr unsigned int STG_TXT_X = (SCREEN_WIDTH - (SCREEN_WIDTH / 5));
 constexpr unsigned int STG_TXT_Y = 0;
-// Stage points
-constexpr unsigned int STG_PTS = 200;
 
 // Next stage button
 constexpr unsigned int NSB_BT_X = (WALL_X2 - (B_WIDTH * 1.5));
 constexpr unsigned int NSB_BT_Y = (WALL_Y2 + (B_HEIGHT / 2));
+
+// Multi bomb info text 
+constexpr unsigned int MBOMB_TXT_X = (SCREEN_WIDTH / 3);
+constexpr unsigned int MBOMB_TXT_Y = 50;
+
+// Aim bomb info text 
+constexpr unsigned int ABOMB_TXT_X = (SCREEN_WIDTH / 3);
+constexpr unsigned int ABOMB_TXT_Y = 50;
+
 
 class RenderMng
 {
@@ -52,13 +57,22 @@ public:
 	void renderTimer(Uint32 currTime);
 	void renderScore(int score);
 	void renderStage(int stage);
+	void renderMultiBomb();
+	void renderAimBomb(int _clicks);
 
 private:
 	SDL_Rect m_src_rect, m_dst_rect;
 	SDL_Window* m_window;
 	SDL_Renderer* m_renderer;
 
-	WTexture m_block_tex[BTYPES], m_bomb_tex[BTYPES], m_timer_tex, m_score_tex, m_stage_tex, m_nst_bttex;
+	WTexture m_block_tex[BTYPES],
+		m_bomb_tex[BTYPES],
+		m_timer_tex,
+		m_score_tex,
+		m_stage_tex,
+		m_nst_bttex,
+		m_multiB_tex,
+		m_aimB_tex;
 	TTF_Font* m_timer_font;
 
 	void initTextures();

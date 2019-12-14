@@ -72,6 +72,8 @@ RenderMng::~RenderMng()
 	m_score_tex.free();
 	m_stage_tex.free();
 	m_nst_bttex.free();
+	m_multiB_tex.free();
+	m_aimB_tex.free();
 
 	// Free font
 	TTF_CloseFont(m_timer_font);
@@ -113,6 +115,8 @@ void RenderMng::initTextures()
 		m_timer_tex = WTexture(m_renderer);
 		m_score_tex = WTexture(m_renderer);
 		m_stage_tex = WTexture(m_renderer);
+		m_multiB_tex = WTexture(m_renderer);
+		m_aimB_tex = WTexture(m_renderer);
 	}
 }
 
@@ -163,6 +167,32 @@ void RenderMng::renderStage(int _stage)
 	m_stage_tex.render(STG_TXT_X, STG_TXT_Y);
 }
 
+// Renders the info text of the multi bomb
+void RenderMng::renderMultiBomb()
+{
+	// Black
+	SDL_Color _textColor = { 0, 0, 0 };
+	// If loaded sucessfully
+	if (!m_multiB_tex.loadFromText("Click to delete all equals", _textColor, m_timer_font))
+	{
+		cout << "Failed rendering multi bomb text" << endl;
+	}
+	m_multiB_tex.render(MBOMB_TXT_X , MBOMB_TXT_Y);
+}
+
+// Renders the info text of the aim bomb
+void RenderMng::renderAimBomb(int _clicks)
+{
+	// Black
+	SDL_Color _textColor = { 0, 0, 0 };
+	// If loaded sucessfully
+	if (!m_aimB_tex.loadFromText("Clicks left: " + to_string(_clicks), _textColor, m_timer_font))
+	{
+		cout << "Failed rendering aim bomb text" << endl;
+	}
+	m_aimB_tex.render(ABOMB_TXT_X, ABOMB_TXT_Y);
+}
+
 // Renders the wall - the matrix of blocks
 void RenderMng::render_wall(wallstrct* _wall)
 {
@@ -197,7 +227,7 @@ void RenderMng::render_block(int _blockType, int _row, int _col)
 	}
 	else
 	{
-		m_bomb_tex[_blockType - (BTYPES+1)].render(m_dst_rect);
+		m_bomb_tex[_blockType - (BTYPES + 1)].render(m_dst_rect);
 	}
 }
 
