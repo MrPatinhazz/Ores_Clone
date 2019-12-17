@@ -1,4 +1,4 @@
-// Main loop
+// Main game loop.
 
 #include "Game.hpp"
 
@@ -11,12 +11,12 @@ int main(int argc, char* argv[])
 
 	while (game->running())
 	{
-		game->handleEvent();
-		game->update();
-		game->render();
+		game->handleEvent();			// Handles mouse and window events
+		game->update();					// Updates game logic
+		game->render();					// Updates sreen
 	}
 
-	game->clean();
+	game->clean();						// Cleans renderer and closes game
 
 	return 0;
 }

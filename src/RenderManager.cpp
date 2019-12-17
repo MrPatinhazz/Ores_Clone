@@ -8,14 +8,8 @@ RenderMng::RenderMng(const char* _title, int _xpos, int _ypos)
 	m_renderer = nullptr;
 	m_timer_font = NULL;
 
-	int _fulls = 0;
-	if (FULLSCREEN)
-	{
-		_fulls = SDL_WINDOW_FULLSCREEN;
-	}
-
 	// Create window with information present on main.cpp
-	m_window = SDL_CreateWindow(_title, _xpos, _ypos, SCREEN_WIDTH, SCREEN_HEIGHT, _fulls);
+	m_window = SDL_CreateWindow(_title, _xpos, _ypos, SCREEN_WIDTH, SCREEN_HEIGHT, FULLSCREEN ? SDL_WINDOW_FULLSCREEN : 0);
 	if (m_window == NULL)
 	{
 		cout << "Error creating window: " << SDL_GetError() << endl;

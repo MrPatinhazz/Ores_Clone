@@ -53,11 +53,11 @@ public:
 	SDL_Window* getWindow() { return m_window; };
 
 	void renderGame(wallstrct* m_wall);
-	void renderTimer(Uint32 currTime);
-	void renderScore(int score);
-	void renderStage(int stage);
-	void renderMultiBomb();
-	void renderAimBomb(int _clicks);
+	void renderTimer(Uint32 currTime);					// Timer text
+	void renderScore(int score);						// Game score text
+	void renderStage(int stage);						// Stage text
+	void renderMultiBomb();								// Multi bomb text
+	void renderAimBomb(int _clicks);					// Aim bomb text
 
 private:
 	SDL_Rect m_src_rect, m_dst_rect;

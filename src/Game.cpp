@@ -18,7 +18,7 @@ Game::~Game()
 {
 }
 
-// Inits SDL, the wall, the render manager and the timer
+// Inits SDL, the wall, the render manager and the timer (also starts the timer)
 void Game::init(const char* _title, int _xpos, int _ypos)
 {
 	if (SDL_Init(SDL_INIT_EVERYTHING) == 0)
@@ -34,7 +34,7 @@ void Game::init(const char* _title, int _xpos, int _ypos)
 	}
 }
 
-// Handles mouse clicks
+// Handles window events and mouse clicks
 void Game::handleEvent()
 {
 	SDL_Event e;
@@ -51,6 +51,7 @@ void Game::handleEvent()
 		{
 			int _blockType = 0;
 
+			// Grid [r][c] click location
 			int _row = (e.button.y - WALL_Y1) / B_HEIGHT;
 			int _col = (e.button.x - WALL_X1) / B_WIDTH;
 
@@ -179,14 +180,14 @@ void Game::deleteBomb(int _row, int _col, int _btype)
 // Updates game logic
 void Game::update()
 {
-	// Push the wall each interval
+	// Push the wall each interval and restarts timer
 	if (m_timer->getTicks() > (Uint32)PSH_INTV)
 	{
 		m_timer->stop();
 		m_wall->pushWallLeft();
 		m_timer->start();
 	}
-	// Loosing condition
+	// Loosing condition - a block reached the start of the grid
 	if (m_wall->getWall().wallMx[NROW - 1][0] != 0)
 	{
 		cout << "You lost!" << endl;
@@ -227,7 +228,6 @@ void Game::render()
 void Game::clean()
 {
 	m_rend->~RenderMng();
-	m_wall->~Wall();
 	m_timer->~Timer();
 
 	TTF_Quit();

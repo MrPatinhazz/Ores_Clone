@@ -9,10 +9,10 @@
 
 using namespace std;
 
-// Stage points
+// Stage points needed to pass to the next level
 constexpr unsigned int STG_PTS = 400;
 
-// Max clicks for aim bomb
+// Max clicks allowed when aim bomb is on
 constexpr unsigned int AIM_CLICKS = 9;
 
 class Game
