@@ -19,10 +19,6 @@ Game::Game()
 	restart();
 }
 
-Game::~Game()
-{
-}
-
 // Inits SDL, the wall, the render manager and the timer (also starts the timer)
 void Game::init(const char* _title, int _xpos, int _ypos)
 {
@@ -80,7 +76,16 @@ void Game::handleEvent()
 		if (e.key.keysym.scancode == SDL_SCANCODE_ESCAPE && m_gameStarted)
 		{
 			m_isPaused = !m_isPaused;
-			m_isPaused ? m_timer->pause() : m_timer->unpause();
+			if (m_isPaused)
+			{
+				m_timer->pause();
+				m_music->pause();
+			}
+			else
+			{
+				m_timer->unpause();
+				m_music->resume();
+			}		  
 		}
 		break;
 
@@ -112,7 +117,7 @@ void Game::handleEvent()
 				{
 					if (!m_isPaused)
 					{
-						int _blockType = 0;
+						int block_type = 0;
 
 						// Grid [r][c] click location
 						int _row = (e.button.y - WALL_Y1) / B_HEIGHT;
@@ -121,20 +126,20 @@ void Game::handleEvent()
 						// If clicked inside the wall save the block type
 						if (_row >= 0 && _row < NROW && _col >= 0 && _col < NCOL)
 						{
-							_blockType = m_wall->getWall().wallMx[_row][_col];
+							block_type = m_wall->getWall().wallMx[_row][_col];
 
 							// Not currently in click bomb so click bomb or ore
 							if (!m_isMultiBomb && !m_isAimBomb)
 							{
 								// If the clicked location is an ore
-								if (_blockType <= 5)
+								if (block_type <= 5)
 								{
-									deleteOres(_row, _col, _blockType);
+									deleteOres(_row, _col, block_type);
 								}
 								// If its a bomb
 								else
 								{
-									deleteBomb(_row, _col, _blockType);
+									deleteBomb(_row, _col, block_type);
 								}
 							}
 							// Currently in click bomb 
@@ -143,26 +148,30 @@ void Game::handleEvent()
 								// Multi color bomb - deletes all equal to clicked
 								if (m_isMultiBomb)
 								{
-									int _clickScore = 0;
-									for (int i = 0; i <= NROW; i++)
+									int click_score = 0;
+									if (block_type > 0 && block_type <= 5)
 									{
-										for (int j = 0; j <= NCOL; j++)
+										for (int i = 0; i <= NROW; i++)
 										{
-											if (m_wall->getWall().wallMx[i][j] == _blockType)
+											for (int j = 0; j <= NCOL; j++)
 											{
-												_clickScore++;
-												m_wall->setBlock(i, j, 0);
+												if (m_wall->getWall().wallMx[i][j] == block_type)
+												{
+													click_score++;
+													m_wall->setBlock(i, j, 0);
+												}
 											}
 										}
+
+										m_currScore += (click_score * 10);
+										m_stg_prog += (click_score * 10);
+										m_isMultiBomb = false;
 									}
-									m_currScore += (_clickScore * 10);
-									m_stg_prog += (_clickScore * 10);
-									m_isMultiBomb = false;
 								}
 								// Aim bomb - deletes all clicked
 								if (m_isAimBomb)
 								{
-									if (_blockType > 0 && _blockType <= 5)
+									if (block_type > 0 && block_type <= 5)
 									{
 										m_wall->setBlock(_row, _col, 0);
 										m_ABomb_clicks++;
@@ -219,6 +228,7 @@ void Game::update()
 		// HUD stage bar size calculation
 		if (m_stg_prog > m_max_stg_pts)
 		{
+			m_music->levelUp();
 			m_currStage++;
 			m_max_stg_pts += 10;
 			m_stg_prog = 0;
@@ -243,6 +253,7 @@ void Game::render()
 	{
 		if(m_isLost)
 		{
+			m_music->stop();
 			m_rend->renderLostScreen();
 		}
 		else
@@ -318,13 +329,13 @@ bool Game::clickedButton(Sint32 _mouseX, Sint32 _mouseY, int bt)
 void Game::deleteOres(int _row, int _col, int _btype)
 {
 	// Does the DFS search and deletes the blocks
-	int _clickScore = m_wall->dfsDelete(_row, _col);
+	int click_score = m_wall->dfsDelete(_row, _col);
 
-	m_currScore += (_clickScore * _clickScore);
-	m_stg_prog += (_clickScore * _clickScore);
+	m_currScore += (click_score * click_score);
+	m_stg_prog += (click_score * click_score);
 
 	// If a group of 5 or more is deleted
-	if (_clickScore > 4)
+	if (click_score > 4)
 	{
 		// A bomb is created in its place, with the corresponding type
 		m_wall->setBlock(_row, _col, (_btype + 5));
@@ -334,22 +345,22 @@ void Game::deleteOres(int _row, int _col, int _btype)
 // Deletes blocks with a bomb, or activates the click mode if its the case
 void Game::deleteBomb(int _row, int _col, int _btype)
 {
-	int _clickScore = m_wall->explodeBomb(_row, _col, _btype);
+	int click_score = m_wall->explodeBomb(_row, _col, _btype);
 	// If the bomb already exploded
-	if (_clickScore >= 0)
+	if (click_score >= 0)
 	{
-		m_currScore += (_clickScore * _clickScore);
-		m_stg_prog += (_clickScore * _clickScore);
+		m_currScore += (click_score * click_score);
+		m_stg_prog += (click_score * click_score);
 	}
 	// Click bombs
 	else
 	{
-		if (_clickScore == -1)
+		if (click_score == -1)
 		{
 			m_isMultiBomb = true;
 			m_wall->setBlock(_row, _col, 0);
 		}
-		else if (_clickScore == -2)
+		else if (click_score == -2)
 		{
 			m_isAimBomb = true;
 			m_wall->setBlock(_row, _col, 0);

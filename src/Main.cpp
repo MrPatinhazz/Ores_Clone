@@ -7,13 +7,13 @@ Game* game = nullptr;
 int main(int argc, char* argv[])
 {
 	game = new Game();
-	game->init("Ores", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
+	game->init("City Ores", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
 
 	while (game->running())
 	{
 		game->handleEvent();			// Handles mouse and window events
 		game->update();					// Updates game logic
-		game->render();					// Updates sreen
+		game->render();					// Updates screen
 	}
 
 	game->clean();						// Cleans renderer and closes game

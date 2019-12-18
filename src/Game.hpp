@@ -1,5 +1,7 @@
 #pragma once
 
+// Game class - Holds game methods, current state (Score, time and stage) and game objects
+
 #include "Wall.hpp"
 #include "RenderManager.hpp"
 #include "Timer.hpp"
@@ -11,7 +13,6 @@ class Game
 {
 public:
 	Game();
-	~Game();
 
 	void init(const char* title, int xpos, int ypos);
 	void restart();

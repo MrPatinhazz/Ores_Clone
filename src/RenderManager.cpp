@@ -249,7 +249,7 @@ void RenderMng::renderHUD(Uint32 currTime, int max_time, int currScore, int stg_
 	m_stage_tex.render();
 
 	barSize = STG_MAX_WIDTH - (((double)stg_prog / max_stg_pts) * STG_MAX_WIDTH);
-	m_stage_rect = {STG_TXT_X + 120, 20, barSize, 24 };
+	m_stage_rect = {STG_TXT_X + 130, 20, barSize, 24 };
 	SDL_SetRenderDrawColor(m_renderer, 97, 76, 255, 255);
 	SDL_RenderFillRect(m_renderer, &m_stage_rect);
 

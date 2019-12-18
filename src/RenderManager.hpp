@@ -1,5 +1,9 @@
 #pragma once
 
+// Render Manager - Render all texts and objetcs in game.
+// A future alternative could be each game object handle its own rendering but due to game complexity
+// this approach seemed enough. May need a refactoring to implement animations
+
 #include "WTexture.hpp"
 #include "Wall.hpp"
 

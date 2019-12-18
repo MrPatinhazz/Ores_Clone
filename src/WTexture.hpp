@@ -1,5 +1,9 @@
 #pragma once
 
+// Texture class - holds information and methods about each texture in game. Can be further
+// developed to include color keying , alpha bleding, animations etc...
+// setLoc() exists outside texture constructor due to future plans to add animation.
+
 #include "SDL.h"
 #include "SDL_image.h"
 #include "SDL_ttf.h"

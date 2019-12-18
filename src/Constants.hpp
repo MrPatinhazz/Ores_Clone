@@ -22,7 +22,7 @@ constexpr unsigned int STG_PTS = 400;
 // Max clicks allowed when aim bomb is on
 constexpr unsigned int AIM_CLICKS = 9;
 // Push wall interval in ms
-extern constexpr double PSH_INTV = 6000;
+extern constexpr double PSH_INTV = 7000;
 
 // Screen size
 constexpr bool FULLSCREEN = false;

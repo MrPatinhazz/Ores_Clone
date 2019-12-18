@@ -2,6 +2,7 @@
 	Wall Class:
 	Holds wall graphical and matrix dimensions
 	Methods do delete blocks, move blocks vertically and horizontally
+	Also holds bombs methods
 */
 
 #pragma once

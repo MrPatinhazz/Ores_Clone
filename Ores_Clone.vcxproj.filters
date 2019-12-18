@@ -112,4 +112,12 @@
       <Filter>Resource Files</Filter>
     </Font>
   </ItemGroup>
+  <ItemGroup>
+    <Media Include="assets\433701__dersuperanton__level-up-voice.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+    <Media Include="assets\Miami Nights - Extended Theme.wav">
+      <Filter>Resource Files</Filter>
+    </Media>
+  </ItemGroup>
 </Project>
