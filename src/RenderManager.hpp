@@ -2,46 +2,8 @@
 
 #include "WTexture.hpp"
 #include "Wall.hpp"
-#include "SDL.h"
-#include "SDL_image.h"
-#include <iostream>
-#include <string>
 
 using namespace std;
-
-constexpr unsigned int SCREEN_WIDTH = 800;
-constexpr unsigned int SCREEN_HEIGHT = 600;
-constexpr bool FULLSCREEN = false;
-
-// Wall start and end x & y coordinate
-constexpr unsigned int WALL_X1 = (SCREEN_WIDTH - W_WIDTH);
-constexpr unsigned int WALL_X2 = (W_WIDTH + WALL_X1);
-constexpr unsigned int WALL_Y1 = ((SCREEN_HEIGHT - W_HEIGHT) / 2);
-constexpr unsigned int WALL_Y2 = (W_HEIGHT + WALL_Y1);
-
-// Score text X & Y
-constexpr unsigned int SCR_TXT_X = 0;
-constexpr unsigned int SCR_TXT_Y = 0;
-
-// Timer text
-constexpr unsigned int TM_TXT_X = (SCREEN_WIDTH / 2);
-constexpr unsigned int TM_TXT_Y = 0;
-
-// Current stage text
-constexpr unsigned int STG_TXT_X = (SCREEN_WIDTH - (SCREEN_WIDTH / 5));
-constexpr unsigned int STG_TXT_Y = 0;
-
-// Next stage button
-constexpr unsigned int NSB_BT_X = (WALL_X2 - (B_WIDTH * 1.5));
-constexpr unsigned int NSB_BT_Y = (WALL_Y2 + (B_HEIGHT / 2));
-
-// Multi bomb info text 
-constexpr unsigned int MBOMB_TXT_X = (SCREEN_WIDTH / 3);
-constexpr unsigned int MBOMB_TXT_Y = 50;
-
-// Aim bomb info text 
-constexpr unsigned int ABOMB_TXT_X = (SCREEN_WIDTH / 3);
-constexpr unsigned int ABOMB_TXT_Y = 50;
 
 class RenderMng
 {
@@ -52,27 +14,33 @@ public:
 	SDL_Renderer* getRenderer() { return m_renderer; };
 	SDL_Window* getWindow() { return m_window; };
 
-	void renderGame(wallstrct* m_wall);
-	void renderTimer(Uint32 currTime);					// Timer text
-	void renderScore(int score);						// Game score text
-	void renderStage(int stage);						// Stage text
-	void renderMultiBomb();								// Multi bomb text
-	void renderAimBomb(int _clicks);					// Aim bomb text
+	void renderBg();										// Background image
+	void renderMenu();										// Initial menu
+	void renderPauseScreen();								// Pause screen
+	void renderGame(wallstrct* m_wall);						// Wall and grid
+	void renderHUD(Uint32 currTime, int score, int stage);  // Score, timer and stage
+	void renderMultiBomb();									// Multi bomb text
+	void renderAimBomb(int _clicks);						// Aim bomb text
 
 private:
-	SDL_Rect m_src_rect, m_dst_rect;
 	SDL_Window* m_window;
 	SDL_Renderer* m_renderer;
 
 	WTexture m_block_tex[BTYPES],
 		m_bomb_tex[BTYPES],
+		m_backg_tex,
 		m_timer_tex,
 		m_score_tex,
 		m_stage_tex,
 		m_nst_bttex,
+		m_start_bt,
+		m_quit_bt,
+		m_paused_tex,
 		m_multiB_tex,
 		m_aimB_tex;
-	TTF_Font* m_timer_font;
+
+	TTF_Font *m_game_font, *m_paused_font;
+	SDL_Rect m_timer_rect;
 
 	void initTextures();
 

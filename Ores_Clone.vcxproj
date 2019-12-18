@@ -70,8 +70,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LibraryPath>$(ProjectDir)include\SDL2_image-2.0.5\lib\x64;$(ProjectDir)include\SDL2-2.0.10\lib\x64;$(ProjectDir)include\SDL2_ttf-2.0.15\lib\x64;$(LibraryPath)</LibraryPath>
-    <IncludePath>$(ProjectDir)include\SDL2-2.0.10\include;$(ProjectDir)include\SDL2_image-2.0.5\include;$(ProjectDir)include\SDL2_ttf-2.0.15\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(ProjectDir)include\SDL2_mixer-2.0.4\lib\x64;$(ProjectDir)include\SDL2_image-2.0.5\lib\x64;$(ProjectDir)include\SDL2-2.0.10\lib\x64;$(ProjectDir)include\SDL2_ttf-2.0.15\lib\x64;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(ProjectDir)include\SDL2-2.0.10\include;$(ProjectDir)include\SDL2_image-2.0.5\include;$(ProjectDir)include\SDL2_ttf-2.0.15\include;$(ProjectDir)include\SDL2_mixer-2.0.4\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -98,7 +98,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <AdditionalLibraryDirectories>$(ProjectDir)include\SDL2_image-2.0.5\lib\x64;$(ProjectDir)include\SDL2-2.0.10\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;SDL2_mixer.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -132,7 +132,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\Constants.hpp" />
     <ClInclude Include="src\Game.hpp" />
+    <ClInclude Include="src\MusicManager.hpp" />
     <ClInclude Include="src\RenderManager.hpp" />
     <ClInclude Include="src\WTexture.hpp" />
     <ClInclude Include="src\Timer.hpp" />
@@ -141,12 +143,14 @@
   <ItemGroup>
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\MusicManager.cpp" />
     <ClCompile Include="src\RenderManager.cpp" />
     <ClCompile Include="src\WTexture.cpp" />
     <ClCompile Include="src\Timer.cpp" />
     <ClCompile Include="src\Wall.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="assets\background.png" />
     <Image Include="assets\bomb_1.png" />
     <Image Include="assets\bomb_2.png" />
     <Image Include="assets\bomb_3.png" />
@@ -158,6 +162,8 @@
     <Image Include="assets\ore_4.png" />
     <Image Include="assets\ore_5.png" />
     <Image Include="assets\pushw_b.png" />
+    <Image Include="assets\quit_b.png" />
+    <Image Include="assets\start_b.png" />
   </ItemGroup>
   <ItemGroup>
     <Font Include="assets\Pacifico.ttf" />

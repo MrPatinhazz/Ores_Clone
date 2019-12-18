@@ -30,6 +30,12 @@
     <ClInclude Include="src\WTexture.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Constants.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\MusicManager.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\Game.cpp">
@@ -48,6 +54,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\WTexture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\MusicManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -83,6 +92,15 @@
       <Filter>Resource Files</Filter>
     </Image>
     <Image Include="assets\bomb_5.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\quit_b.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\start_b.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="assets\background.png">
       <Filter>Resource Files</Filter>
     </Image>
   </ItemGroup>

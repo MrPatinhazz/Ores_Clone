@@ -236,7 +236,6 @@ int Wall::explodeBomb(int row, int col, int bType)
 	{
 	case 6: // Multi color (red) - Breaks all of the same color of clicked
 	{
-		cout << "Multi color bomb" << endl;
 		score = -1;
 		break;
 	}
@@ -267,7 +266,7 @@ int Wall::explodeBomb(int row, int col, int bType)
 		}
 		break;
 	}
-	case 9: // Grey - Breaks all blocks in the bomb's column
+	case 9: // Pink - Breaks all blocks in the bomb's column
 	{
 		for (int i = NROW; i--;)
 		{
@@ -281,7 +280,6 @@ int Wall::explodeBomb(int row, int col, int bType)
 	}
 	case 10: // Green - Breaks all clicked blocks
 	{
-		cout << "Green bomb" << endl;
 		score = -2;
 		break;
 	}

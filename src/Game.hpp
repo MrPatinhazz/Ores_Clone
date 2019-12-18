@@ -3,17 +3,9 @@
 #include "Wall.hpp"
 #include "RenderManager.hpp"
 #include "Timer.hpp"
-#include "SDL.h"
-#include "SDL_image.h"
-#include <iostream>
+#include "MusicManager.hpp"
 
 using namespace std;
-
-// Stage points needed to pass to the next level
-constexpr unsigned int STG_PTS = 400;
-
-// Max clicks allowed when aim bomb is on
-constexpr unsigned int AIM_CLICKS = 9;
 
 class Game
 {
@@ -30,12 +22,13 @@ public:
 	
 private:
 	unsigned int m_currScore, m_currStage, m_MBombType, m_ABomb_clicks;
-	bool m_isRunning, m_isMultiBomb, m_isAimBomb;
+	bool m_gameStarted, m_isRunning, m_isPaused, m_isMultiBomb, m_isAimBomb;
 	Timer* m_timer;
 	Wall* m_wall;
 	RenderMng* m_rend;
+	MusicMng* m_music;
 	
-	bool clickedPushW(Sint32 mouseX, Sint32 mouseY);
+	bool clickedButton(Sint32 mouseX, Sint32 mouseY, int bt);
 	void deleteOres(int _row, int _col, int _btype);
 	void deleteBomb(int _row, int _col, int _btype);
 };

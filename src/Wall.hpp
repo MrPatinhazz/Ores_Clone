@@ -6,6 +6,7 @@
 
 #pragma once
 
+#include "Constants.hpp"
 #include "SDL.h"
 #include <iostream>
 #include <cstdlib>
@@ -15,15 +16,6 @@
 #include <set>
 
 #define WMX m_wall.wallMx
-
-constexpr unsigned int BTYPES = 5;						// Block types (equal to bomb types)
-constexpr unsigned int NROW = 10;						// Number of rows and columns
-constexpr unsigned int NCOL = 17;						
-constexpr unsigned int INITCOL = (NCOL / 2);			// Starting column of a new wall (left to right)
-constexpr unsigned int B_WIDTH = 32;					// Block width and height
-constexpr unsigned int B_HEIGHT = 32;					
-constexpr unsigned int W_WIDTH = (B_WIDTH * NCOL);		// Wall width and height
-constexpr unsigned int W_HEIGHT = (B_HEIGHT * NROW);	
 
 using namespace std;
 
