@@ -12,10 +12,7 @@ Wall::Wall()
 void Wall::setBlock(int _row, int _col, int _type)
 {
 	WMX[_row][_col] = _type;
-	if (_type == 0)
-	{
-		fixWall();
-	}
+	fixWall();						// Avoids holes if type == 0 or bombs created "mid air"
 }
 
 // Inits wall matrix with random values from 0 (empty) to BTYPES+1, with BTYPES types of blocks. Usually 5
@@ -42,6 +39,16 @@ void Wall::initWall()
 	// Fills empty holes after creation
 	fixWall();
 }
+
+void Wall::clearWall()
+{
+	for (auto x : WMX)
+	{
+		x = 0;
+	}
+}
+
+
 
 // Prints the wall matrix to console in matrix form
 void Wall::printWall()

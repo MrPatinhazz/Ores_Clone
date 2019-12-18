@@ -15,6 +15,7 @@ constexpr unsigned int B_HEIGHT = 32;
 constexpr unsigned int W_WIDTH = (B_WIDTH * NCOL);
 constexpr unsigned int W_HEIGHT = (B_HEIGHT * NROW);
 
+// ----- RENDER CONSTANTS -----
 // ----- GAME CONSTANTS -----
 // Stage points needed to pass to the next level
 constexpr unsigned int STG_PTS = 400;
@@ -23,11 +24,12 @@ constexpr unsigned int AIM_CLICKS = 9;
 // Push wall interval in ms
 extern constexpr double PSH_INTV = 6000;
 
-// ----- RENDER CONSTANTS -----
 // Screen size
 constexpr bool FULLSCREEN = false;
 constexpr unsigned int SCREEN_WIDTH = 800;
 constexpr unsigned int SCREEN_HEIGHT = 600;
+constexpr unsigned int BTN_WIDTH = 300;
+constexpr unsigned int BTN_HEIGHT = 150;
 
 // MENU SCREEN - Start and Quit button
 constexpr unsigned int START_BT_X = (SCREEN_WIDTH / 2) - 150;
@@ -38,6 +40,14 @@ constexpr unsigned int QUIT_BT_Y = 400;
 // PAUSED SCREEN - Paused text
 constexpr unsigned int PAUSED_TXT_X = 0;
 constexpr unsigned int PAUSED_TXT_Y = (SCREEN_HEIGHT / 2) - 200;
+
+// LOST SCREEN - You lost text and final score text
+constexpr unsigned int YLOST_TXT_X = 0;
+constexpr unsigned int YLOST_TXT_Y = 0;
+constexpr unsigned int FSCR_TXT_X = 0;
+constexpr unsigned int FSCR_TXT_Y = 200;
+constexpr unsigned int MENU_BT_X = (SCREEN_WIDTH / 2) - 150;
+constexpr unsigned int MENU_BT_Y = 430;
 
 // Wall start and end x & y coordinate
 constexpr unsigned int WALL_X1 = (SCREEN_WIDTH - W_WIDTH);
@@ -52,11 +62,12 @@ constexpr unsigned int SCR_TXT_Y = 0;
 // Timer text and bar
 constexpr unsigned int TM_TXT_X = (SCREEN_WIDTH / 2)-200;
 constexpr unsigned int TM_TXT_Y = 0;
-constexpr double TM_MAX_WIDTH = 200;
+constexpr double TM_MAX_WIDTH = 150;
 
 // Current stage text
-constexpr unsigned int STG_TXT_X = (SCREEN_WIDTH - (SCREEN_WIDTH / 5));
+constexpr unsigned int STG_TXT_X = (SCREEN_WIDTH - 300);
 constexpr unsigned int STG_TXT_Y = 0;
+constexpr double STG_MAX_WIDTH = 150;
 
 // Next stage button
 constexpr unsigned int NSB_BT_X = (WALL_X2 - (B_WIDTH * 1.5));

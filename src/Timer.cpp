@@ -30,15 +30,18 @@ void Timer::start()
 // Stop function
 void Timer::stop()
 {
-	// Stop
-	m_started = false;
+	if (m_started)
+	{
+		// Stop
+		m_started = false;
 
-	// Unpause
-	m_paused = false;
+		// Unpause
+		m_paused = false;
 
-	// Clear tick variables
-	m_start_ticks = 0;
-	m_paused_ticks = 0;
+		// Clear tick variables
+		m_start_ticks = 0;
+		m_paused_ticks = 0;
+	}
 }
 
 // Pause/Unpause function

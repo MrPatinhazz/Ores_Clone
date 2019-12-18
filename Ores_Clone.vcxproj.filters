@@ -103,6 +103,9 @@
     <Image Include="assets\background.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="assets\menu_b.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Font Include="assets\Pacifico.ttf">

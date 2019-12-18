@@ -14,6 +14,7 @@ public:
 	~Game();
 
 	void init(const char* title, int xpos, int ypos);
+	void restart();
 	void handleEvent();
 	void update();
 	void render();
@@ -21,8 +22,8 @@ public:
 	bool running() { return m_isRunning; };
 	
 private:
-	unsigned int m_currScore, m_currStage, m_MBombType, m_ABomb_clicks;
-	bool m_gameStarted, m_isRunning, m_isPaused, m_isMultiBomb, m_isAimBomb;
+	unsigned int m_currScore, m_currStage, m_MBombType, m_ABomb_clicks, m_push_intv, m_stg_prog, m_max_stg_pts;
+	bool m_gameStarted, m_isRunning, m_isPaused, m_isLost, m_isMultiBomb, m_isAimBomb;
 	Timer* m_timer;
 	Wall* m_wall;
 	RenderMng* m_rend;

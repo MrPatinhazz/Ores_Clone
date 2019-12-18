@@ -33,6 +33,7 @@ public:
 	void printWall();									
 
 	void initWall();									// Starts/resets the wall
+	void clearWall();
 	void setBlock(int row, int col, int type);			// Changes the block type
 	int dfsDelete(int row, int col);					// Calls for DFS and returns score
 	void pushWallLeft();								// Generates one random column and pushes wall left
